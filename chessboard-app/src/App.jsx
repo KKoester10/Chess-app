@@ -42,6 +42,9 @@ function App() {
     setTimeout(makeRandomMove, 200);
     return true;
   }
-  return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+  return <div>
+    <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+  </div>   
+  
 }
 export default App;
