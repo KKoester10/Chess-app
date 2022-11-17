@@ -1,12 +1,11 @@
 import React from 'react'
-import Chess from 'chess.js';
 
-export default function EvaluateBoard(props) {
+export default function EvaluateBoard() {
     // WEIGHT value of pieces on the board  
-    const weights = { 'p': 100, 'n': 280, 'b': 320, 'r': 479, 'q': 929, 'k': 60000, 'k_e': 60000};
+    var weights = { p: 100, n: 280, b: 320, r: 479, q: 929, k: 60000, k_e: 60000};
     let positionWhite = {
     // PAWN Table
-        'p':[
+        p:[
             [ 100, 100, 100, 100, 105, 100, 100,  100],
             [  78,  83,  86,  73, 102,  82,  85,  90],
             [   7,  29,  21,  44,  40,  31,  44,   7],
@@ -17,7 +16,7 @@ export default function EvaluateBoard(props) {
             [   0,   0,   0,   0,   0,   0,   0,   0]
         ],
     // KNIGHT Table
-    'n': [ 
+    n: [ 
             [-66, -53, -75, -75, -10, -55, -58, -70],
             [ -3,  -6, 100, -36,   4,  62,  -4, -14],
             [ 10,  67,   1,  74,  73,  27,  62,  -2],
@@ -28,7 +27,7 @@ export default function EvaluateBoard(props) {
             [-74, -23, -26, -24, -19, -35, -22, -69]
         ],
     // BISHOP Table
-    'b': [ 
+    b: [ 
             [-59, -78, -82, -76, -23,-107, -37, -50],
             [-11,  20,  35, -42, -39,  31,   2, -22],
             [ -9,  39, -32,  41,  52, -10,  28, -14],
@@ -39,7 +38,7 @@ export default function EvaluateBoard(props) {
             [ -7,   2, -15, -12, -14, -15, -10, -10]
         ],
     // ROOK Table
-    'r': [  
+    r: [  
             [ 35,  29,  33,   4,  37,  33,  56,  50],
             [ 55,  29,  56,  67,  55,  62,  34,  60],
             [ 19,  35,  28,  33,  45,  27,  25,  15],
@@ -50,7 +49,7 @@ export default function EvaluateBoard(props) {
             [-30, -24, -18,   5,  -2, -18, -31, -32]
         ],
     // QUEEN Table 
-    'q': [   
+    q: [   
             [  6,   1,  -8,-104,  69,  24,  88,  26],
             [ 14,  32,  60, -10,  20,  76,  57,  24],
             [ -2,  43,  32,  60,  72,  63,  43,   2],
@@ -61,7 +60,7 @@ export default function EvaluateBoard(props) {
             [-39, -30, -31, -13, -31, -36, -34, -42]
         ],
     // KING Table 
-    'k': [  
+    k: [  
             [  4,  54,  47, -99, -99,  60,  83, -62],
             [-32,  10,  55,  56,  56,  55,  10,   3],
             [-62,  12, -57,  44, -67,  28,  37, -31],
@@ -73,7 +72,7 @@ export default function EvaluateBoard(props) {
         ],
 
     // Endgame King Table
-    'k_e': [
+    k_e: [
             [-50, -40, -30, -20, -20, -30, -40, -50],
             [-30, -20, -10,   0,   0, -10, -20, -30],
             [-30, -10,  20,  30,  30,  20, -10, -30],
@@ -86,28 +85,102 @@ export default function EvaluateBoard(props) {
     };
     // revering position of white tables values for black positioning 
     let positionBlack = {
-        'p': positionWhite['p'].slice().reverse(),
-        'n': positionWhite['n'].slice().reverse(),
-        'b': positionWhite['b'].slice().reverse(),
-        'r': positionWhite['r'].slice().reverse(),
-        'q': positionWhite['q'].slice().reverse(),
-        'k': positionWhite['k'].slice().reverse(),
-        'k_e': positionWhite['k_e'].slice().reverse()
+        p: positionWhite['p'].slice().reverse(),
+        n: positionWhite['n'].slice().reverse(),
+        b: positionWhite['b'].slice().reverse(),
+        r: positionWhite['r'].slice().reverse(),
+        q: positionWhite['q'].slice().reverse(),
+        k: positionWhite['k'].slice().reverse(),
+        k_e: positionWhite['k_e'].slice().reverse()
     }
 
     //Evaluation of positionOfSelf
-    let positionOfSelf = {'w':positionWhite, 'b': positionBlack};
+    let positionOfSelf = {w:positionWhite, b: positionBlack};
     //Evaluation of positionOfOpponent
-    let positionOfOpponent = {'w':positionBlack, 'b': positionWhite};
+    let positionOfOpponent = {w:positionBlack, b: positionWhite};
 
-    const evaluateBoard = (move, prevSum, color) => {
+    // Evaluation of the board 
+     const evaluateBoard = (move, prevSum, color) => {
 
         // varibles that tell where to move the A.I. from starting position to end Position
-        var from = [8 - parseInt(move.from[1]), move.from.charCodeAt(0) - 'a'.charCodeAt(0)];
-        
-        var to = [8 - parseInt(move.to[1]), move.to.charCodeAt(0) - 'a'.charCodeAt(0)];
+        //source square
+        let from = [
+            8 - parseInt(move.from[1]), 
+            move.from.charCodeAt(0) - 'a'.charCodeAt(0)
+        ];
+        // target square
+        let to = [
+            8 - parseInt(move.to[1]),
+            move.to.charCodeAt(0) - 'a'.charCodeAt(0)
+            ];
 
+// --------------------------------------------------
+        // change endgame behavior for kings
+
+        // if previous sum is less than -1500
+        // if the piece to move is === to the 'k' table replace 'k' table with 'k_e' table
+        if (prevSum < -1500) {
+            if (move.piece === 'k') {
+                move.piece = 'k_e';
+            }
+        };
+// --------------------------------------------------
+        // determining  wether or not if a captured in a move was Good for Player or Bad for Player 
+        
+        // if 'captured' was in the move we made
+        if('captured' in move ){
+            // checks that the color of the piece that was captured was black 
+            // Opponent piece was captured by Player.
+            if (move.color === color) {
+                // setting the previous sum to the new sum of the overall positions based on the PST tables
+                let sumValue = (weights[move.captured] + positionOfOpponent[move.color][move.captured][to[0]][to[1]]);
+                prevSum += sumValue;
+                console.log(prevSum);
+            }else{
+            // if the color that was captured does not match Black
+            // Our piece was captured by A.I.
+                let sumValue = (weights[move.captured] + positionOfSelf[move.color][move.captured][to[0]][to[1]]);
+                prevSum -= sumValue;
+                console.log(prevSum);
+            }
+        }
+// --------------------------------------------------
+        // determining if pieces are promotable and adding that prevSum from the PST tables 
+        if (move.flags.includes('p')) {
+            // piece is promoted to default queen * adding a addition function later to account for other options *
+            move.promotion = 'q';
+
+            //determining wether our PAWN was promoted or opponents
+
+            if (move.color === color) {
+                // Player piece was promoted
+                let sumValuePiece = (weights[move.piece] + positionOfSelf[move.color][move.piece][from[0]][from[1]]);
+                let sumValuePromotion = (weights[move.promotion] + positionOfSelf[move.color][move.promotion][to[0]][to[1]]);
+                prevSum -= sumValuePiece;
+                prevSum += sumValuePromotion;
+                console.log(prevSum);
+            }else{
+                // Opponent piece was promoted
+                let sumValuePiece = (weights[move.piece] + positionOfSelf[move.color][move.piece][from[0]][from[1]]);
+                let sumValuePromotion = (weights[move.promotion] + positionOfSelf[move.color][move.promotion][to[0]][to[1]]);
+                prevSum += sumValuePiece;
+                prevSum -= sumValuePromotion;
+                console.log(prevSum);
+            }
+        } else {
+            if (move.color !== color) {
+                prevSum += positionOfSelf[move.color][move.piece][from[0]][from[1]];
+                prevSum -= positionOfSelf[move.color][move.piece][to[0]][to[1]];
+                console.log(prevSum);
+            }else{
+                prevSum -= positionOfSelf[move.color][move.piece][from[0]][from[1]];
+                prevSum += positionOfSelf[move.color][move.piece][to[0]][to[1]];
+                console.log(prevSum);
+            }
+        }
+        console.log(prevSum);
+        return prevSum;
     }
-    
-  return (evaluateBoard())
+    evaluateBoard();
+//   return (evaluateBoard())
 }

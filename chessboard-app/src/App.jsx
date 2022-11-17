@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import Chess from 'chess.js';
+import EvaluateBoard from './Components/EvaluateBoard';
 function App() {
   const [game, setGame] = useState(new Chess());
-  
+
   // perform modify function on game state
   function safeGameMutate(modify) {
+    
     setGame((g) => {
       const update = { ...g };
       modify(update);
@@ -23,6 +25,7 @@ function App() {
     safeGameMutate((game) => {
       game.move(possibleMoves[randomIndex]);
     });
+    
   }
   // perform action when piece dropped by user
   function onDrop(sourceSquare, targetSquare) {
@@ -44,6 +47,7 @@ function App() {
   }
   return <div>
     <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+    
   </div>   
   
 }
