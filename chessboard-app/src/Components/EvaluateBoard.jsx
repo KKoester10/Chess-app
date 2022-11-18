@@ -190,6 +190,7 @@ export default function EvaluateBoard (move, prevSum, color) {
         }
     }
     return prevSum;
+    
 }
     
 

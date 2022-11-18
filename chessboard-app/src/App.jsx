@@ -22,10 +22,12 @@ function App() {
     // select random move
     const randomIndex = Math.floor(Math.random() * possibleMoves.length);
     // play random move
+    let move = null;
     safeGameMutate((game) => {
-      game.move(possibleMoves[randomIndex]);
+      move = game.move(possibleMoves[randomIndex]);
     });
-    EvaluateBoard(game.move, 1, 'b')
+    console.log(move);
+    console.log(EvaluateBoard(move, 0 , 'b')); 
   }
   // perform action when piece dropped by user
   function onDrop(sourceSquare, targetSquare) {
@@ -37,6 +39,8 @@ function App() {
         to: targetSquare,
         promotion: 'q'
       });
+    console.log(move);
+    console.log(EvaluateBoard(move, 0 , 'b'));
     });
     
     // illegal move made
