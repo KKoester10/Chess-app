@@ -1,6 +1,5 @@
-import React from 'react'
 import EvaluateBoard from './EvaluateBoard';
-var positionCount;
+// let positionCount;
 /*
     * Performs the minimax algorithm to choose the best move: https://en.wikipedia.org/wiki/Minimax (pseudocode provided)
     * Recursively explores all possible moves up to a given depth, and evaluates the game board at the leaves.
@@ -19,16 +18,15 @@ var positionCount;
     *  the best move at the root of the current subtree.
  */
     export default function MiniMax(game, depth, alpha, beta, isMaximizingPlayer, sum, color){
-       positionCount++; 
-       var children = game.ugly_moves({verbose: true});
+    //    positionCount++; 
+       let children = game.moves({verbose: true});
        
        // Sort moves randomly, so the same move isn't always picked on ties
        children.sort(function(a, b){return 0.5 - Math.random()});
        
        var currentMove;
        // Maximum depth exceeded or node is a terminal node (no children)
-       if (depth === 0 || children.length === 0)
-       {
+       if (depth === 0 || children.length === 0){
            return [null, sum]
        }
    
@@ -36,56 +34,40 @@ var positionCount;
        var maxValue = Number.NEGATIVE_INFINITY;
        var minValue = Number.POSITIVE_INFINITY;
        var bestMove;
-       for (var i = 0; i < children.length; i++)
-       {
+       for (var i = 0; i < children.length; i++){
            currentMove = children[i];
    
            // Note: in our case, the 'children' are simply modified game states
-           var currPrettyMove = game.ugly_move(currentMove);
+           let currPrettyMove = game.move(currentMove);
            var newSum = EvaluateBoard(currPrettyMove, sum, color);
            var [childBestMove, childValue] = MiniMax(game, depth - 1, alpha, beta, !isMaximizingPlayer, newSum, color);
-           
            game.undo();
-       
-           if (isMaximizingPlayer)
-           {
-               if (childValue > maxValue)
-               {
+           if (isMaximizingPlayer){
+               if (childValue > maxValue){
                    maxValue = childValue;
                    bestMove = currPrettyMove;
                }
-               if (childValue > alpha)
-               {
+               if (childValue > alpha){
                    alpha = childValue;
                }
-           }
-   
-           else
-           {
-               if (childValue < minValue)
-               {
+           }else{
+               if (childValue < minValue){
                    minValue = childValue;
                    bestMove = currPrettyMove;
                }
-               if (childValue < beta)
-               {
+               if (childValue < beta){
                    beta = childValue;
                }
            }
-   
            // Alpha-beta pruning
-           if (alpha >= beta)
-           {
+           if (alpha >= beta){
                break;
            }
        }
-   
-       if (isMaximizingPlayer)
-       {
+       if (isMaximizingPlayer){
            return [bestMove, maxValue]
        }
-       else
-       {
+       else{
            return [bestMove, minValue];
        }
    }
