@@ -1,0 +1,27 @@
+.promoprompt{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .promoprompt-inner {
+    position: absolute;
+    background-color: #ca9d77;
+    padding: 2px;
+    border: 50px;
+    border-color: #000;
+    border-radius: 5px;
+  }
+  
+  .image {
+    border: 10px;
+    border-color: #000;
+    
+  }

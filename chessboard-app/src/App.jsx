@@ -4,10 +4,13 @@ import Chess from 'chess.js';
 import EvaluateBoard from './ChessEngine/EvaluateBoard';
 import GetBestMove from './ChessEngine/GetBestMove';
 import Assests from './Assests/src_chess_assets_moveSoundEffect_1.mp3'
+import PromotionPrompt from "./Promotion_Prompt/PromotionPrompt"
 
 let globalSum = 0;
 function App() {
   const [game, setGame] = useState(new Chess());
+  const [promotion, setPromotion] = useState('q');
+  const [promoPrompt, setPromoPrompt] = useState(false);
 
   function play(){
     new Audio(Assests).play();
@@ -48,26 +51,54 @@ function App() {
   }
   
   // perform action when piece dropped by user
+  // function onDrop(sourceSquare, targetSquare) {
+  //   // attempt move
+  //   let move = null;
+  //   safeGameMutate((game) => {
+  //     move = game.move({
+  //       from: sourceSquare,
+  //       to: targetSquare,
+  //       promotion: promotion
+  //     });
+  //   });
+  //   play();
+  //   // illegal move made
+  //   if (move === null) return false;
+  //   // valid move made, make computer move
+  //   setTimeout(AIMove, 200);
+  //   return true;
+  // }
+
   function onDrop(sourceSquare, targetSquare) {
-    // attempt move
-    let move = null;
-    safeGameMutate((game) => {
-      move = game.move({
-        from: sourceSquare,
-        to: targetSquare,
-        promotion: 'q'
-      });
-    });
-    play();
-    // illegal move made
-    if (move === null) return false;
-    // valid move made, make computer move
-    setTimeout(AIMove, 200);
-    return true;
+    const from = sourceSquare;
+    const to = targetSquare;
+    const gameCopy = { ...game };
+
+    const isPromotion =
+      gameCopy
+        .moves({ verbose: true })
+        .filter(
+          (move) =>
+            move.from === from && move.to === to && move.flags.includes("p")
+        ).length > 0;
+
+    if (isPromotion) {
+      setPromoPrompt(true);
+      <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion = {setPromotion}/>;
+      gameCopy.move({ to, from, promotion: promotion});
+    } else {
+      gameCopy.move({ to, from });
+    }
+
+    setGame(gameCopy);
+    return gameCopy.move;
   }
 
   return <div>
-    <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+    <Chessboard position={game.fen()} onPieceDrop={onDrop}/>;
+    <button onMouseDown={()=> setPromoPrompt(true)}> open PopUp</button>
+    <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion = {setPromotion}/>
+
   </div>   
   
 }
