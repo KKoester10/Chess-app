@@ -1,5 +1,3 @@
-import React from 'react'
-
 
 // WEIGHT value of pieces on the board  
 var weights = { p: 100, n: 280, b: 320, r: 479, q: 929, k: 60000, k_e: 60000};
@@ -156,7 +154,7 @@ export default function EvaluateBoard (move, prevSum, color) {
         //determining wether our PAWN was promoted or opponents
 
         if (move.color === color) {
-            // Player piece was promoted
+            // Player piece was promoted which is good for us
             let sumValuePiece = weights[move.piece] +
                 positionOfSelf[move.color][move.piece][from[0]][from[1]];
 
@@ -167,7 +165,7 @@ export default function EvaluateBoard (move, prevSum, color) {
             prevSum += sumValuePromotion;
             
         }else{
-            // Opponent piece was promoted
+            // Opponent piece was promoted which is bad for us
             let sumValuePiece = weights[move.piece] +
                 positionOfSelf[move.color][move.piece][from[0]][from[1]];
 

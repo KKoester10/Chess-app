@@ -1,14 +1,17 @@
 import { useState } from 'react';
 import { Chessboard } from 'react-chessboard';
 import Chess from 'chess.js';
-import EvaluateBoard from './Components/EvaluateBoard';
-import GetBestMove from './Components/GetBestMove';
+import EvaluateBoard from './ChessEngine/EvaluateBoard';
+import GetBestMove from './ChessEngine/GetBestMove';
+import Assests from './Assests/src_chess_assets_moveSoundEffect_1.mp3'
 
 let globalSum = 0;
 function App() {
   const [game, setGame] = useState(new Chess());
 
-
+  function play(){
+    new Audio(Assests).play();
+  }
 
   // perform modify function on game state
   function safeGameMutate(modify) {
@@ -18,7 +21,6 @@ function App() {
       return update;
     });
   }  
-
 
   function makeBestMove(color) {
     let move = null;
@@ -38,12 +40,10 @@ function App() {
     const possibleMove = makeBestMove('b')
     // exit if the game is over
     if (game.game_over() || game.in_draw()) return;
-    // select random move
-    // const randomIndex = Math.floor(Math.random() * possibleMoves.length);
-    // play random move
     let move = null;
     safeGameMutate((game) => {
       move = game.move(possibleMove);
+      play();
     }); 
   }
 
@@ -60,7 +60,7 @@ function App() {
         promotion: 'q'
       });
     });
-    
+    play();
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
@@ -70,7 +70,6 @@ function App() {
 
   return <div>
     <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
-    
   </div>   
   
 }
