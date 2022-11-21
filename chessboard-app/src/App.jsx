@@ -36,7 +36,7 @@ function App() {
   }
 
   // make computer move
-  function makeRandomMove() {
+  function AIMove() {
     const possibleMove = makeBestMove('b')
     // exit if the game is over
     if (game.game_over() || game.in_draw()) return;
@@ -46,9 +46,7 @@ function App() {
       play();
     }); 
   }
-
-
-
+  
   // perform action when piece dropped by user
   function onDrop(sourceSquare, targetSquare) {
     // attempt move
@@ -64,7 +62,7 @@ function App() {
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
-    setTimeout(makeRandomMove, 200);
+    setTimeout(AIMove, 200);
     return true;
   }
 
