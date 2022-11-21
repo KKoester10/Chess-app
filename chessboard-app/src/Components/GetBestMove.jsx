@@ -4,11 +4,9 @@ export default function GetBestMove(game, color, currSum) {
     // positionCount = 0;
     let depth;
     if (color === 'b') {
-        depth = 1
-        // parseInt($('#search-depth').find(':selected').text());
+        depth = 3;
     } else {
-        depth = 1
-        // parseInt($('#search-depth-white').find(':selected').text());
+        depth = 3;
     }
     var [bestMove, bestMoveValue] = MiniMax(
       game,

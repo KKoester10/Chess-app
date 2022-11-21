@@ -20,8 +20,6 @@ function App() {
   }  
 
 
-
-
   function makeBestMove(color) {
     let move = null;
     if (color === 'b') {
@@ -61,8 +59,6 @@ function App() {
         to: targetSquare,
         promotion: 'q'
       });
-    console.log(move);
-    console.log(EvaluateBoard(move, 0 , 'b'));
     });
     
     // illegal move made
