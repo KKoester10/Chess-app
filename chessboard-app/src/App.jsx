@@ -7,12 +7,18 @@ import Assests from './Assests/src_chess_assets_moveSoundEffect_1.mp3'
 import PromotionPrompt from "./Promotion_Prompt/PromotionPrompt"
 
 let globalSum = 0;
+
+
 function App() {
   const [game, setGame] = useState(new Chess());
   const [promotion, setPromotion] = useState('q');
   const [promoPrompt, setPromoPrompt] = useState(false);
+  const [histoy, setHistory] = useState([]);
 
-  function play(){
+
+
+  function play() {
+
     new Audio(Assests).play();
   }
 
@@ -23,7 +29,7 @@ function App() {
       modify(update);
       return update;
     });
-  }  
+  }
 
   function makeBestMove(color) {
     let move = null;
@@ -33,7 +39,7 @@ function App() {
       move = GetBestMove(game, color, -globalSum)[0];
     }
     globalSum = EvaluateBoard(move, globalSum, 'b');
-    
+
     console.log(globalSum);
     game.move(move);
   }
@@ -47,9 +53,9 @@ function App() {
     safeGameMutate((game) => {
       move = game.move(possibleMove);
       play();
-    }); 
+    });
   }
-  
+
   // perform action when piece dropped by user
   // function onDrop(sourceSquare, targetSquare) {
   //   // attempt move
@@ -69,7 +75,12 @@ function App() {
   //   return true;
   // }
 
+
+
   function onDrop(sourceSquare, targetSquare) {
+    var history = game.history()
+    // console.log(history)
+    //var abc = document.write(history)
     const from = sourceSquare;
     const to = targetSquare;
     const gameCopy = { ...game };
@@ -84,22 +95,30 @@ function App() {
 
     if (isPromotion) {
       setPromoPrompt(true);
-      <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion = {setPromotion}/>;
-      gameCopy.move({ to, from, promotion: promotion});
+      <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion={setPromotion} />;
+      gameCopy.move({ to, from, promotion: promotion });
     } else {
       gameCopy.move({ to, from });
     }
 
     setGame(gameCopy);
     return gameCopy.move;
+
+
+
   }
 
   return <div>
-    <Chessboard position={game.fen()} onPieceDrop={onDrop}/>;
-    <button onMouseDown={()=> setPromoPrompt(true)}> open PopUp</button>
-    <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion = {setPromotion}/>
+    <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+    <button onMouseDown={() => setPromoPrompt(true)}> open PopUp</button>
+    <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion={setPromotion} />
+    <div className='history'>
 
-  </div>   
-  
+    </div>
+    <script>
+      console.log(history)
+    </script>
+  </div>
+
 }
 export default App;
