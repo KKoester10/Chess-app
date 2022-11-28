@@ -88,7 +88,7 @@ function onDropPvC(sourceSquare, targetSquare) {
   // }
   function historyFeed(){
     let gameHistory = game.history();
-    return gameHistory.map((move)=> <li key={move}>{move},</li>);
+    return gameHistory.map((move)=> <li key={move}>){move},</li>);
   }
 
   function promotionPrompt(){

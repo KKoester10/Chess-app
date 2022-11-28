@@ -23,7 +23,7 @@ export default function ChessGame(){
     
     <div className='game-btns'>
         <button className='btnscomp'>Play A Computer</button>
-        <button className='btnsperson' onClick>Play A Person</button>
+        <button className='btnsperson'>Play A Person</button>
         {/* <Btn background={"orange"} text={"Play A Computer"}/>
         <Btn background={"blue"} text={"Play A Person"} /> */}
         
