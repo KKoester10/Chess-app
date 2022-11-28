@@ -11,3 +11,99 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+
+
+.chessboard {
+  display: flex;
+  justify-content: left;
+  margin-top: 20px;
+  margin-left: 150px;
+  
+  }
+.chessitsself{
+  border: 8px solid rgb(0, 0, 0);
+  margin-bottom: 165px;
+}
+
+img{
+  width: 60%;
+}
+
+.developers {
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  padding: 15px;
+  justify-content:space-between ;
+  height:100vh;
+  margin-left: 15%;
+}
+
+.developers > h1{
+  font-size: 45px;
+}
+.developers h2{
+  text-align: center;
+}
+.header{
+  display: grid;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.learn {
+  display: flex;
+  justify-content: center;
+} 
+
+.player{
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+ 
+}
+
+.aboutchess {
+  display: flex;
+  justify-content: center;
+} 
+
+.videotitles{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  
+}
+
+.videotitles p{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
+
+
+.massivediv{
+  display:grid;
+  grid-template-columns: repeat(2,auto);
+  padding: 5px;
+  margin:5px;
+}
+.game-btns{
+  display: flex;
+  margin-left: 220PX;
+  margin-top: 14px;
+  padding: 8px 20px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
