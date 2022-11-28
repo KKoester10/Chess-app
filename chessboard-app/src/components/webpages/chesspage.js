@@ -31,7 +31,7 @@ export default function ChessGame(){
      
       <div className='chessboard'>
         <div className='chessitsself'>
-    <ChessApp /> <Chessboard /> </div> {roomJoined ? <Chat username={username} room={room} socket={socket}/> : <Home username={username}
+    <ChessApp />  </div> {roomJoined ? <Chat username={username} room={room} socket={socket}/> : <Home username={username}
                 setUsername={setUsername}
                 room={room}
                 setRoom={setRoom}

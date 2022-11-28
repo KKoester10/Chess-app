@@ -125,7 +125,7 @@ function onDropPvC(sourceSquare, targetSquare) {
   //   console.log("onSnapEnd " + promotion)
   // }
 
-  
+  return(
     <div>
       <Chessboard position={game.fen()} onPieceDrop={PvP} />;
       <button onClick={()=>{
@@ -143,6 +143,7 @@ function onDropPvC(sourceSquare, targetSquare) {
         promotion={pawnPromotion}
       /> */}
     </div>
+  );
  
 }
 export default ChessApp;
