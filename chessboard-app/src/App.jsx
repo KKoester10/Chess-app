@@ -13,7 +13,8 @@ function App() {
   const [game, setGame] = useState(new Chess());
   const [promotion, setPromotion] = useState('q');
   const [promoPrompt, setPromoPrompt] = useState(false);
-  const [histoy, setHistory] = useState([]);
+  //const [histoy, setHistory] = useState([]);
+  var history = game.history()
 
 
 
@@ -79,8 +80,10 @@ function App() {
 
   function onDrop(sourceSquare, targetSquare) {
     var history = game.history()
-    // console.log(history)
-    //var abc = document.write(history)
+    console.log(history)
+
+    var abc = document.getElementById("history1").innerText = history
+
     const from = sourceSquare;
     const to = targetSquare;
     const gameCopy = { ...game };
@@ -112,13 +115,11 @@ function App() {
     <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
     <button onMouseDown={() => setPromoPrompt(true)}> open PopUp</button>
     <PromotionPrompt trigger={promoPrompt} setTrigger={setPromoPrompt} promotion={promotion} setPromotion={setPromotion} />
-    <div className='history'>
 
-    </div>
-    <script>
-      console.log(history)
-    </script>
+    <div className='history' id={"history1"}></div>
+
   </div>
+
 
 }
 export default App;
