@@ -15,6 +15,7 @@ To have all the correct node modules please following instructions below.
     - npm install
     - npm install chess.js
     - npm install -D @types/chess.js
+    - npm install react-player
     - npm i react-router-dom socket.io-client
 
 5.) Now you will need to replace the code inside the Node module chess.js with the most recent version of code from https://github.com/jhlywa/chess.js/blob/master/chess.js.
