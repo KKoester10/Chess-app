@@ -143,11 +143,12 @@ export default function ChessGame(){
     <div className='game-btns'>
       <button className='btnscomp' onClick={()=>{
         setPvP(PvP => onDropPvC);
+        game.reset();
       }}>Player Vs. Computer</button>
       <button className='btnsperson' onClick={()=>{
         setPvP(PvP => onDropPvP);
+        game.reset();
       }}>Player Vs. Player</button>
-        
     </div>
      
       <div className='chessboard'>
@@ -161,8 +162,19 @@ export default function ChessGame(){
                 roomJoined={setRoomJoined}
                 />}
           </div>
+      <div className='game-btns'>
+        <button className='btnsperson' onClick={()=>{
+          setPvP(PvP => onDropPvP);
+          game.reset()
+        }}>Reset</button>
+        <button className='btnsperson' onClick={()=>{
+          setPvP(PvP => onDropPvP);
+          game.undo()
+        }}>undo</button>
+      </div>
+
         <div class='history-box'>
-          <div className='history'>
+          <div className='history'>                 
             <ol>{historyFeed()}</ol>
           </div>
         </div>
