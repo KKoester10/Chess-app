@@ -19,6 +19,7 @@ export default function ChessGame() {
   const [roomJoined, setRoomJoined] = useState(false);
   const [game, setGame] = useState(new Chess());
   const [PvP, setPvP] = useState(() => onDropPvP);
+  const [refresh, setRefresh] = useState(()=> false);
 
   // const [promotion, setPromotion] = useState("q");
   // const [promoPrompt, setPromoPrompt] = useState(false);
@@ -79,6 +80,7 @@ export default function ChessGame() {
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
+    setRefresh(false);
     setTimeout(AIMove, 200);
     return true;
   }
@@ -124,6 +126,7 @@ export default function ChessGame() {
     } else {
       gameCopy.move({ to, from });
     }
+    setRefresh(false);
     setGame(gameCopy);
     return gameCopy.move;
   }
@@ -181,6 +184,7 @@ export default function ChessGame() {
         <button
           className="btnsperson"
           onClick={() => {
+            setRefresh(false);
             setPvP((PvP) => onDropPvP);
             game.reset();
           }}
@@ -190,7 +194,7 @@ export default function ChessGame() {
         <button
           className="btnsperson"
           onClick={() => {
-            setPvP((PvP) => onDropPvP);
+            setRefresh(true);
             game.undo();
           }}
         >
