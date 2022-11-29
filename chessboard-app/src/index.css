@@ -131,3 +131,15 @@ ol{
   max-width: 500px;
   max-height: 150px;
 }
+.history-box h1{
+  margin-left: 800px;
+  margin-right: 250px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  height: 150px;
+  width: 500px;
+  top: 610px; 
+  left: 40px;
+  
+}

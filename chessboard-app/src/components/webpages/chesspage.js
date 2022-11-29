@@ -204,6 +204,7 @@ export default function ChessGame() {
       </div>
 
         <div className='history-box'>
+          <h1>Move History</h1>
           <div className="history">
             <ol>{historyFeed()}</ol>
           </div>
