@@ -30,7 +30,7 @@ code {
   }
 .chessitsself{
   border: 8px solid rgb(0, 0, 0);
-  margin-bottom: 165px;
+  margin-bottom: 200px;
 }
 
 img{
@@ -106,14 +106,22 @@ img{
   border: none;
   cursor: pointer;
 }
+.reset-btns{
+  display: flex;
+  margin-left: 275px;
+  margin-top: -195px;
+}
 .history{
-  text-align: center;
-  color: brown;
-  font-weight: bold;
-  border-style: solid;
-  border-color: black;
-  position: fixed;
-  top: 5%;
-  left: 50%;
+  display:flex;
+  margin-left: 800px;
+  margin-right: 250px;
+  justify-content: center;
+  border: solid 4px #242424;
+  position: absolute;
+  top: 650px; 
+  left: 40px;
 }
 
+li{
+  display: inline;
+}

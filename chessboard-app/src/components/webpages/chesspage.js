@@ -1,25 +1,25 @@
-import React from 'react'
-import { Chessboard } from 'react-chessboard'
-import './../../index.css'
-import { Link } from 'react-router-dom'
-import io from 'socket.io-client';
-import Home from '../chatpages/home'
-import { useState } from 'react';
-import Chat from '../chatpages/chat'
+import React from "react";
+import { Chessboard } from "react-chessboard";
+import "./../../index.css";
+import { Link } from "react-router-dom";
+import io from "socket.io-client";
+import Home from "../chatpages/home";
+import { useState } from "react";
+import Chat from "../chatpages/chat";
 import Chess from "chess.js";
-import EvaluateBoard from "./../ChessEngine/EvaluateBoard"
-import GetBestMove from '../ChessEngine/GetBestMove';
-import Assets from './../Assets/src_chess_assets_moveSoundEffect_1.mp3';
-const socket = io.connect('http://localhost:4000');
+import EvaluateBoard from "./../ChessEngine/EvaluateBoard";
+import GetBestMove from "../ChessEngine/GetBestMove";
+import Assets from "./../Assets/src_chess_assets_moveSoundEffect_1.mp3";
+const socket = io.connect("http://localhost:4000");
 
 let globalSum = 0;
-export default function ChessGame(){
-  const [username, setUsername] = useState('');
-  const [room, setRoom] = useState('');
+export default function ChessGame() {
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
   const [roomJoined, setRoomJoined] = useState(false);
   const [game, setGame] = useState(new Chess());
-  const [PvP, setPvP] = useState(()=>onDropPvP); 
-  
+  const [PvP, setPvP] = useState(() => onDropPvP);
+
   // const [promotion, setPromotion] = useState("q");
   // const [promoPrompt, setPromoPrompt] = useState(false);
 
@@ -72,7 +72,7 @@ export default function ChessGame(){
       move = game.move({
         from: sourceSquare,
         to: targetSquare,
-        promotion: 'q'
+        promotion: "q",
       });
     });
     play();
@@ -83,7 +83,7 @@ export default function ChessGame(){
     return true;
   }
 
-   // function pawnPromotion(value){
+  // function pawnPromotion(value){
   //   <PromotionPrompt
   //   trigger={promoPrompt}
   //   setTrigger={setPromoPrompt}
@@ -94,15 +94,15 @@ export default function ChessGame(){
   //   return promotion;
   // }
 
-  function historyFeed(){
+  function historyFeed() {
     let gameHistory = game.history();
-    return gameHistory.map((move)=> <li key={move}>){move},</li>);
+    return gameHistory.map((move) => <li key={move}>{move},</li>);
   }
 
-  function promotionPrompt(){
+  function promotionPrompt() {
     const promotion = prompt();
     return promotion;
-   }
+  }
 
   function onDropPvP(sourceSquare, targetSquare) {
     let from = sourceSquare;
@@ -116,13 +116,13 @@ export default function ChessGame(){
           (move) =>
             move.from === from && move.to === to && move.flags.includes("p")
         ).length > 0;
-    
+
     if (isPromotion) {
-     let promotion = promotionPrompt();
-     //var temp = setPromoPrompt(promoPrompt => true);
-     gameCopy.move({ to, from, promotion: promotion });
+      let promotion = promotionPrompt();
+      //var temp = setPromoPrompt(promoPrompt => true);
+      gameCopy.move({ to, from, promotion: promotion });
     } else {
-      gameCopy.move({ to, from })
+      gameCopy.move({ to, from });
     }
     setGame(gameCopy);
     return gameCopy.move;
@@ -134,50 +134,76 @@ export default function ChessGame(){
   // }
 
   const handleJoinRoom = (joined) => {
-    setRoomJoined(joined)
-  }
+    setRoomJoined(joined);
+  };
 
-
-    return <>
-
-    <div className='game-btns'>
-      <button className='btnscomp' onClick={()=>{
-        setPvP(PvP => onDropPvC);
-        game.reset();
-      }}>Player Vs. Computer</button>
-      <button className='btnsperson' onClick={()=>{
-        setPvP(PvP => onDropPvP);
-        game.reset();
-      }}>Player Vs. Player</button>
-    </div>
-     
-      <div className='chessboard'>
-        <div className='chessitsself'>
-        <Chessboard position={game.fen()} onPieceDrop={PvP} />
-          </div> {roomJoined ? <Chat username={username} room={room} socket={socket}/> : <Home username={username}
-                setUsername={setUsername}
-                room={room}
-                setRoom={setRoom}
-                socket={socket}
-                roomJoined={setRoomJoined}
-                />}
-          </div>
-      <div className='game-btns'>
-        <button className='btnsperson' onClick={()=>{
-          setPvP(PvP => onDropPvP);
-          game.reset()
-        }}>Reset</button>
-        <button className='btnsperson' onClick={()=>{
-          setPvP(PvP => onDropPvP);
-          game.undo()
-        }}>undo</button>
+  return (
+    <>
+      <div className="game-btns">
+        <button
+          className="btnscomp"
+          onClick={() => {
+            setPvP((PvP) => onDropPvC);
+            game.reset();
+          }}
+        >
+          Player Vs. Computer
+        </button>
+        <button
+          className="btnsperson"
+          onClick={() => {
+            setPvP((PvP) => onDropPvP);
+            game.reset();
+          }}
+        >
+          Player Vs. Player
+        </button>
       </div>
 
-        <div class='history-box'>
-          <div className='history'>                 
-            <ol>{historyFeed()}</ol>
-          </div>
-        </div>
+      <div className="chessboard">
+        <div className="chessitsself">
+          <Chessboard position={game.fen()} onPieceDrop={PvP} />
+        </div>{" "}
+        {roomJoined ? (
+          <Chat username={username} room={room} socket={socket} />
+        ) : (
+          <Home
+            username={username}
+            setUsername={setUsername}
+            room={room}
+            setRoom={setRoom}
+            socket={socket}
+            roomJoined={setRoomJoined}
+          />
+        )}
+      </div>
+      <div className="reset-btns">
+        <button
+          className="btnsperson"
+          onClick={() => {
+            setPvP((PvP) => onDropPvP);
+            game.reset();
+          }}
+        >
+          Reset Game
+        </button>
+        <button
+          className="btnsperson"
+          onClick={() => {
+            setPvP((PvP) => onDropPvP);
+            game.undo();
+          }}
+        >
+          Undo Move
+        </button>
+      </div>
 
+        <div className='history-box'>
+        <div className="history">
+          <ol>{historyFeed()}</ol>
+        </div>
+        </div>
+      
     </>
+  );
 }

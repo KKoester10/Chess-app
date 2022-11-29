@@ -6,7 +6,6 @@ import './index.css'
 import Developers from './components/webpages/developers';
 import AboutChess from './components/webpages/learn';
 import ChessGame from './components/webpages/chesspage';
-import Footer from './components/webpages/footer';
 import io from 'socket.io-client';
 import Home from './components/chatpages/home';
 import Chat from './components/chatpages/chat';
@@ -45,7 +44,7 @@ function App() {
         </Routes>
       </div>
     </>
-    <Footer />
+   
     </Router>
       
    

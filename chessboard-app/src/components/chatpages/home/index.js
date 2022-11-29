@@ -13,6 +13,7 @@ const Home = ({ username, setUsername, room, setRoom, socket, roomJoined }) => {
     // Redirect to /chat
     // navigate('/chat', { replace: true });
   };
+  
 
   return (
     <div className={styles.container}>
@@ -42,6 +43,9 @@ const Home = ({ username, setUsername, room, setRoom, socket, roomJoined }) => {
         >
           Join Room
         </button>
+
+
+        
       </div>
     </div>
   );
