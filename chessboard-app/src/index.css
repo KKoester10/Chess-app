@@ -115,13 +115,19 @@ img{
   display:flex;
   margin-left: 800px;
   margin-right: 250px;
-  justify-content: center;
+  justify-content: start;
   border: solid 4px #242424;
   position: absolute;
+  height: 150px;
+  width: 500px;
   top: 650px; 
   left: 40px;
 }
 
 li{
-  display: inline;
+  display: inline-table;
+}
+ol{
+  max-width: 500px;
+  max-height: 150px;
 }
