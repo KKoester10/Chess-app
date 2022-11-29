@@ -12,12 +12,14 @@ namespace ChessAPI.Models
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string? ProfilePic {  get; set; }
+        public string Email { get; set; }
         [Required]
         public string Password { get; set; }
-        public string Email { get; set; }
         public DateTime CreatedDate { get; set; }
-
-        //public List<ChessGame> ChessGames { get; set; }
+        
+        //Navigation Properties
+        public List<ChessGame_Players> ChessGame_Players { get; set; }
 
     }
 }
