@@ -9,7 +9,7 @@ import Chat from "../chatpages/chat";
 import Chess from "chess.js";
 import EvaluateBoard from "./../ChessEngine/EvaluateBoard";
 import GetBestMove from "../ChessEngine/GetBestMove";
-import Assets from "./../Assets/src_chess_assets_moveSoundEffect_1.mp3";
+import Assets from "./../Assets/move-self.mp3";
 const socket = io.connect("http://localhost:4000");
 
 let globalSum = 0;
@@ -126,6 +126,7 @@ export default function ChessGame() {
     } else {
       gameCopy.move({ to, from });
     }
+    play();
     setRefresh(false);
     setGame(gameCopy);
     return gameCopy.move;
