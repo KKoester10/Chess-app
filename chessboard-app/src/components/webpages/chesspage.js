@@ -20,6 +20,7 @@ export default function ChessGame() {
   const [game, setGame] = useState(new Chess());
   const [PvP, setPvP] = useState(() => onDropPvP);
   const [refresh, setRefresh] = useState(()=> false);
+  const [undoState, setUndoState] = useState(()=>false);
 
   // const [promotion, setPromotion] = useState("q");
   // const [promoPrompt, setPromoPrompt] = useState(false);
@@ -27,6 +28,14 @@ export default function ChessGame() {
   // useEffect(()=>{
   //   console.log("Use effect " + promotion);
   // }, [promotion])
+
+  // useEffect(()=>{
+  //   console.log(game.in_check());
+  //   if (game.in_check() === true) {
+  //     setRefresh(true);
+  //     alert("you are in check");
+  //   }
+  // })
 
   function play() {
     new Audio(Assets).play();
@@ -101,6 +110,16 @@ export default function ChessGame() {
     return gameHistory.map((move) => <li key={move}>{move},</li>);
   }
 
+  function undo(){
+    if (refresh === false) {
+      setRefresh(true);
+      game.undo();
+    }else if(refresh === true){
+      setRefresh(false);
+      game.undo();
+    }
+  }
+
   function promotionPrompt() {
     const promotion = prompt();
     return promotion;
@@ -148,6 +167,7 @@ export default function ChessGame() {
           className="btnscomp"
           onClick={() => {
             setPvP((PvP) => onDropPvC);
+            setUndoState(true);
             game.reset();
           }}
         >
@@ -157,6 +177,7 @@ export default function ChessGame() {
           className="btnsperson"
           onClick={() => {
             setPvP((PvP) => onDropPvP);
+            setUndoState(false)
             game.reset();
           }}
         >
@@ -164,6 +185,7 @@ export default function ChessGame() {
         </button>
       </div>
 
+          {/* style={{display:game.in_check()? 'none':'visible'}}  */}
       <div className="chessboard">
         <div className="chessitsself">
           <Chessboard position={game.fen()} onPieceDrop={PvP} />
@@ -185,6 +207,7 @@ export default function ChessGame() {
         <button
           className="btnsperson"
           onClick={() => {
+            setUndoState(false)
             setRefresh(false);
             setPvP((PvP) => onDropPvP);
             game.reset();
@@ -195,8 +218,11 @@ export default function ChessGame() {
         <button
           className="btnsperson"
           onClick={() => {
-            setRefresh(true);
-            game.undo();
+            if (undoState === true) {
+              alert("You cant undo a computers move")
+            }else{
+               undo();
+            }
           }}
         >
           Undo Move
