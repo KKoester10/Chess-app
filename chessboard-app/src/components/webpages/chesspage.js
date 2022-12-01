@@ -162,6 +162,7 @@ export default function ChessGame() {
 
   return (
     <>
+    <div className='gamepage'>
       <div className="game-btns">
         <button
           className="btnscomp"
@@ -235,7 +236,7 @@ export default function ChessGame() {
             <ol>{historyFeed()}</ol>
           </div>
         </div>
-      
+        </div>
     </>
   );
 }
