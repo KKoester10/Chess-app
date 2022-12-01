@@ -1,47 +1,55 @@
-import { useState } from 'react';
-import { Chessboard } from 'react-chessboard';
-import Chess from 'chess.js';
+import React from "react";
+import Navbar from "./components/Navbar";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import HeroSection from "./components/HeroSection";
+import "./index.css";
+import Developers from "./components/webpages/developers";
+import AboutChess from "./components/webpages/learn";
+import ChessGame from "./components/webpages/chesspage";
+import io from "socket.io-client";
+import Home from "./components/chatpages/home";
+import Chat from "./components/chatpages/chat";
+import { useState } from "react";
+
+const socket = io.connect("http://localhost:4000");
+
 function App() {
-  const [game, setGame] = useState(new Chess());
-  
-  // perform modify function on game state
-  function safeGameMutate(modify) {
-    setGame((g) => {
-      const update = { ...g };
-      modify(update);
-      return update;
-    });
-  }
-  // make computer move
-  function makeRandomMove() {
-    const possibleMoves = game.moves();
-    // exit if the game is over
-    if (game.game_over() || game.in_draw() || possibleMoves.length === 0) return;
-    // select random move
-    const randomIndex = Math.floor(Math.random() * possibleMoves.length);
-    // play random move
-    safeGameMutate((game) => {
-      game.move(possibleMoves[randomIndex]);
-    });
-  }
-  // perform action when piece dropped by user
-  function onDrop(sourceSquare, targetSquare) {
-    // attempt move
-    let move = null;
-    safeGameMutate((game) => {
-      move = game.move({
-        from: sourceSquare,
-        to: targetSquare,
-        promotion: 'q'
-      });
-    });
-    
-    // illegal move made
-    if (move === null) return false;
-    // valid move made, make computer move
-    setTimeout(makeRandomMove, 200);
-    return true;
-  }
-  return <Chessboard position={game.fen()} onPieceDrop={onDrop} />;
+  const [username, setUsername] = useState("");
+  const [room, setRoom] = useState("");
+  return (
+    <Router>
+      <Navbar />
+
+      <Routes>
+        <Route exact path="/" element={<HeroSection />} />
+        <Route exact path="/chessgame" element={<ChessGame />} />
+        <Route exact path="/thedevelopers" element={<Developers />} />
+        <Route exact path="/aboutchess" element={<AboutChess />} />
+      </Routes>
+      <>
+        <div className="chatapplication">
+          <Routes>
+            <Route
+              path="/home"
+              element={
+                <Home
+                  username={username}
+                  setUsername={setUsername}
+                  room={room}
+                  setRoom={setRoom}
+                  socket={socket}
+                />
+              }
+            />
+
+            <Route
+              path="/chat"
+              element={<Chat username={username} room={room} socket={socket} />}
+            />
+          </Routes>
+        </div>
+      </>
+    </Router>
+  );
 }
 export default App;

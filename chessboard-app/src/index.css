@@ -5,9 +5,166 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
+ 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'PT Sans', sans-serif;
+}
+
+
+.chessboard {
+  display: flex;
+  justify-content: left;
+  margin-top: 20px;
+  margin-left: 150px;
+  
+  }
+.chessitsself{
+  border: 8px solid rgb(0, 0, 0);
+  margin-bottom: 200px;
+}
+
+.gamepage{
+  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
+ 
+
+}
+
+
+
+.header{
+  display: grid;
+  justify-content: center;
+  margin-bottom: 15px;
+  color: white;
+}
+.learn {
+  display: flex;
+  justify-content: center;
+} 
+
+.player{
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+ 
+}
+
+.aboutchess {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+} 
+
+.videotitles{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: white;
+
+  
+}
+
+.videotitles p{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+}
+
+
+.massivediv1{
+  display:grid;
+  grid-template-columns: repeat(2,auto);
+ 
+}
+.game-btns{
+  display: flex;
+  margin-left: 220PX;
+  
+  padding: 8px 20px;
+  border-radius: 2px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+.reset-btns{
+  display: flex;
+  margin-left: 275px;
+  margin-top: -195px;
+}
+.history{
+  display:flex;
+  margin-left: 800px;
+  margin-right: 250px;
+  justify-content: start;
+  border: solid 4px #242424;
+  position: absolute;
+  height: 150px;
+  width: 500px;
+  top: 650px; 
+  left: 40px;
+}
+
+li{
+  display: inline-table;
+}
+ol{
+  max-width: 500px;
+  max-height: 150px;
+}
+.history-box h1{
+  margin-left: 800px;
+  margin-right: 250px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  height: 150px;
+  width: 500px;
+  top: 610px; 
+  left: 40px;
+  
+}
+
+
+
+img{
+  width: 45vh;
+}
+.photo-container{
+  display:flex;
+  justify-content: center;
+  
+}
+
+.developers {  
+  margin-top: 55px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(3,auto);
+  justify-content: center;
+  margin-left: 20%;
+  color: white;
+
+}
+.developers  h1{
+  font-size: 45px;
+  color: white;
+}
+.developers p{
+  text-align: center;
+  margin-right: 280px;
+  
 }
