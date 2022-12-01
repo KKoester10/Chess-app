@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 export default function Developers(){
   return (
   <>
+  <div className='developerpage'>
   <h1 className='header'>Meet The Development Team</h1>
   <div className = 'developers'>
   
@@ -60,9 +61,9 @@ export default function Developers(){
  
  
  
- 
  </div>
-
+ </div>
+ 
 
     
 
