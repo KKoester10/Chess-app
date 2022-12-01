@@ -11,11 +11,28 @@
     justify-content: center;
 }
 
+.hero-container h1:hover {
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 3px;
+  }
+
+
+  .hero-container h2:hover {
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 3px;
+}
+.hero-container p:hover {
+    font-variation-settings: "wght" 582; 
+    letter-spacing: 3px;
+}
+
+
 .hero-container > h1{
     color: #fff;
     font-size: 62px;
     margin-top: -100px;
     margin-left: 500px;
+    transition: 700ms ease;
 
 }
 .hero-container >h2{
@@ -23,6 +40,7 @@
     font-size: 62px;
     margin-top: 8px;
     margin-left: 500px;
+    transition: 700ms ease;
 }
 .hero-container > p{
     margin-top: 8px;
@@ -30,6 +48,7 @@
     color:#fff;
     font-size: 32px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    transition: 700ms ease;
 }
 
 .hero-btns{

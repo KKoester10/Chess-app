@@ -5,9 +5,9 @@ import ReactPlayer from 'react-player'
 
 export default function AboutChess(){
     return <> 
-     <h1 className='aboutchess'>Learn About Chess</h1>;
      <div className='massivediv'>
-
+     <h1 className='aboutchess'>Learn About Chess</h1>;
+     <div className='massivediv1'>
     <div className='videotitles'>
          <h2>CHESS FOR BEGINNERS: <br /> <br /> 
          How to play chess properly, a guide for<br />  all beginners.
@@ -82,7 +82,7 @@ If so, this is often a huge weakness?<br />
         
     </div>
     </div>
-   
+   </div>
 
 
     </>
