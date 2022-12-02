@@ -9,15 +9,16 @@
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
-    border: 8px solid rgb(153, 217, 234);
+    border: 8px solid rgb(0, 0, 0);
     border-radius: 2%;
+    box-shadow: 10px 5px 5px black;
   }
   
   /* Room and users component */
   .roomAndUsersColumn {
     border-right: 1px solid #dfdfdf;
     padding: 10px;
-    background: rgb(0, 24, 111);
+    background: url('https://images.unsplash.com/photo-1558051815-0f18e64e6280?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80');
     height: 48vh;
     border-radius: 2%;
     
@@ -30,7 +31,7 @@
   }
   .usersTitle {
     font-size: 1.2rem;
-    color: #fff;
+    color: rgb(0, 0, 0);
   }
   .usersList {
     list-style-type: none;
@@ -57,7 +58,7 @@
     padding: 12px;
   }
   .msgMeta {
-    color: rgb(153, 217, 234);
+    color: rgb(0, 0, 0);
     font-size: 0.75rem;
   }
   .msgText {
@@ -74,6 +75,99 @@
     margin-right: 16px;
     width: 60%;
     border-radius: 6px;
-    border: 8px solid rgb(153, 217, 234);
+    border: 8px solid rgb(0, 0, 0);
     font-size: 0.9rem;
+  }
+
+  @media screen and (max-width: 1920px) {
+
+    .chatContainer {
+      /* max-width: 450px; */
+      /* margin: 0 auto; */
+      /* display: grid; */
+      /* grid-template-columns: 1fr 4fr; */
+      /* gap: 20px; */
+      width: 75vh;
+      height: 50vh;
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      border: 8px solid rgb(0, 0, 0);
+      border-radius: 2%;
+      background: #fff;
+    }
+    
+    /* Room and users component */
+    .roomAndUsersColumn {
+      border-right: 1px solid #dfdfdf;
+      padding: 10px;
+      background: url('https://images.unsplash.com/photo-1558051815-0f18e64e6280?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80');
+      height: 48vh;
+      border-radius: 1%;
+      
+    }
+    .roomTitle {
+      margin-bottom: 60px;
+      text-transform: uppercase;
+      font-size: 1.0rem;
+      color: #fff;
+    }
+    .usersTitle {
+      font-size: 1.2rem;
+      color: #fff;
+    }
+    .usersList {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 60px;
+      color: rgb(0, 0, 0);
+      border-bottom: 1px solid #fff;
+    }
+    .usersList li {
+      margin-bottom: 12px;
+    }
+    
+    /* Messages */
+    .messagesColumn {
+      height: 40vh;
+      overflow: auto;
+      padding: 10px 10px 10px 40px;
+    }
+    .message {
+      background: rgb(0, 24, 111);
+      border-radius: 6px;
+      margin-bottom: 24px;
+      max-width: 600px;
+      padding: 12px;
+    }
+    .msgMeta {
+      color: rgb(0, 0, 0);
+      font-size: 0.75rem;
+    }
+    .msgText {
+      color: #fff;
+    }
+    
+    /* Message input and button */
+    .sendMessageContainer {
+      padding: 16px 20px 20px 16px;
+      margin-right: 10px;
+     
+    }
+    .messageInput {
+      padding: 14px;
+      margin-top: 14.5px;
+      margin-right: 14px;
+      width: 60%;
+      border-radius: 6px;
+      border: 8px solid rgb(0, 0, 0);
+      font-size: 0.9rem;
+    }
+
+
+
+
+
+
+
   }

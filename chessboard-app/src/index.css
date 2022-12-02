@@ -33,6 +33,10 @@ code {
 .chessitsself{
   border: 8px solid rgb(0, 0, 0);
   margin-bottom: 200px;
+  min-width: 576px;
+  min-height: 576px;
+  max-height: 576px;
+  max-width: 576px;
 }
 
 .gamepage{
@@ -103,19 +107,20 @@ code {
 .reset-btns{
   display: flex;
   margin-left: 275px;
-  margin-top: -195px;
+  margin-top: -90px;
 }
 .history{
   display:flex;
   margin-left: 800px;
   margin-right: 250px;
   justify-content: start;
-  border: solid 4px #242424;
+  border: solid 4px #ffffff;
   position: absolute;
   height: 150px;
   width: 500px;
   top: 650px; 
   left: 40px;
+  color: #ffffff;
 }
 
 li{
@@ -135,10 +140,9 @@ ol{
   width: 500px;
   top: 610px; 
   left: 40px;
+  color: #ffffff;
   
 }
-
-
 
 img{
   width: 45vh;
@@ -167,4 +171,7 @@ img{
   text-align: center;
   margin-right: 280px;
   
+}
+.developers a{
+  color: #ffffff;
 }
