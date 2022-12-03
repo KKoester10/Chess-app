@@ -19,36 +19,87 @@ export default function Developers(){
  <div>
  <img src={profilepic}></img>
  <p>KOLTON KOESTER<br />
- https://github.com/KKoester10<br/>
- https://www.linkedin.com/in/kkoester10/<br/>
+ <a
+   target="_blank"
+   rel="noreferrer"
+   href='https://github.com/KKoester10'>
+        Go to Kolton's Github
+</a><br />
+<a
+   target="_blank"
+   rel="noreferrer"
+   href='https://www.linkedin.com/in/kkoester10/'>
+        Go to Kolton's LinkedIn
+</a><br />
  </p>
   </div>
   <div>
   <img src={headshot}></img>
-  <p>SKIP TOWNSEND<br />
-  https://github.com/skiptownsend<br/>
-  https://www.linkedin.com/in/skiptownsend/<br/>
+  <p>SKIP TOWNSEND<br /> 
+  <a
+   target="_blank"
+   rel="noreferrer"
+   href='https://github.com/skiptownsend'>
+        Go to Skip's Github
+</a><br />
+<a
+   target="_blank"
+   rel="noreferrer"
+   href='https://www.linkedin.com/in/skiptownsend/'>
+        Go to Skip's LinkedIn
+</a><br />
  </p>
   </div>
   <div>
   <img src='https://media-exp1.licdn.com/dms/image/C4E03AQFUpksLgaQjWw/profile-displayphoto-shrink_800_800/0/1662396897053?e=1674691200&v=beta&t=tticW78PzVgeXVfM7s8C9s4vIJA1OTGfaSeXUIxYZG0' alt=""></img>
   <p>KEVIN DAGES<br />
-  https://github.com/Kevin-Dages<br/>
-  https://www.linkedin.com/in/kevin-dages/<br/>
+  <a
+   target="_blank"
+   rel="noreferrer"
+   href='https://github.com/Kevin-Dages'>
+        Go to Kevin's Github
+</a><br />
+<a
+   target="_blank"
+   rel="noreferrer"
+   href='https://www.linkedin.com/in/kevin-dages/'>
+        Go to Kevin's LinkedIn
+</a><br />
  </p>
   </div>
   <div>
   <img src={JacobKresak}></img>
   <p>JACOB KRESAK<br />
-  https://github.com/jkresak101<br/>
-  https://www.linkedin.com/in/jacob-kresak/<br/>
+  <a
+   target="_blank"
+   rel="noreferrer"
+   href='https://github.com/jkresak101'>
+        Go to Jacob's Github
+</a><br />
+<a
+   target="_blank"
+   rel="noreferrer"
+   href='https://www.linkedin.com/in/jacob-kresak/'>
+        Go to Jacob's LinkedIn
+</a><br />
  </p>
   </div>
-  <div>
+  <div className="abu">
   <img src={unknown}></img>
   <p>ABUUKAR ABUKKAR <br />
-  https://github.com/abuukar90<br/>
-  https://www.linkedin.com/in/abuukar-abuukar-44a489174/<br/>
+  <a
+   target="_blank"
+   rel="noreferrer"
+   href='https://github.com/abuukar90'>
+        Go to Abuukar's Github
+</a><br />
+<a
+   target="_blank"
+   rel="noreferrer"
+   href='https://www.linkedin.com/in/abuukar-abuukar-44a489174/'>
+        Go to Abuukar's LinkedIn
+</a><br />
+
  
  </p>
   </div>
