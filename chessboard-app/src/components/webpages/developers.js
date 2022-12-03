@@ -84,7 +84,7 @@ export default function Developers(){
 </a><br />
  </p>
   </div>
-  <div>
+  <div className="abu">
   <img src={unknown}></img>
   <p>ABUUKAR ABUKKAR <br />
   <a
