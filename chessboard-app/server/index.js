@@ -5,6 +5,7 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 const leaveRoom = require('./utils/leave-room');
+var port = process.env.PORT || 3000;
 
 
 app.use(cors());
@@ -13,7 +14,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://wcci-chess.azurewebsites.net: ',
     methods: ['GET', 'POST'],
   },
 });
@@ -87,5 +88,8 @@ io.on('connection', (socket) => {
 app.get("/", (req, res) => {
   res.send("hello world");
 });
-
-server.listen(4000, () => "server is running on port 4000");
+app.listen(process.env.port, function () {  //Updated
+  var addr = app.address();
+  console.log('   app listening on http://' + addr.address + ':' + addr.port);
+});
+//server.listen(4000, () => "server is running on port 4000");
