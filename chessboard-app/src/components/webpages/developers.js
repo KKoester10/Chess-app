@@ -11,7 +11,7 @@ export default function Developers() {
     <>
       <div className="developerpage">
         <h1 className="header">Meet The Development Team</h1>
-        <div className="developers">
+        <div className="top">
           <div>
             <img src={profilepic}></img>
             <p>
@@ -58,6 +58,10 @@ export default function Developers() {
               <br />
             </p>
           </div>
+        </div>
+        {/* top class ------------- */}
+
+        <div className="Middle">
           <div>
             <img
               src="https://media-exp1.licdn.com/dms/image/C4E03AQFUpksLgaQjWw/profile-displayphoto-shrink_800_800/0/1662396897053?e=1674691200&v=beta&t=tticW78PzVgeXVfM7s8C9s4vIJA1OTGfaSeXUIxYZG0"
@@ -107,9 +111,11 @@ export default function Developers() {
               <br />
             </p>
           </div>
-          
         </div>
+        {/* Middle ------------------ */}
+
         <div className="abu">
+          <div>
             <img src={unknown}></img>
             <p>
               ABUUKAR ABUKKAR <br />
@@ -131,6 +137,9 @@ export default function Developers() {
               <br />
             </p>
           </div>
+        </div>
+        {/* Abu Class ------------- */}
+
       </div>
     </>
   );
