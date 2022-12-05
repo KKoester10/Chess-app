@@ -6,7 +6,7 @@ import io from "socket.io-client";
 import Home from "../chatpages/home";
 import { useState } from "react";
 import Chat from "../chatpages/chat";
-import Chess from "chess.js";
+import { Chess } from "chess.js";
 import EvaluateBoard from "./../ChessEngine/EvaluateBoard";
 import GetBestMove from "../ChessEngine/GetBestMove";
 import Assets from "./../Assets/move-self.mp3";
