@@ -23,9 +23,7 @@ export default function ChessGame() {
   const [PvP, setPvP] = useState(() => onDropPvP);
   const [refresh, setRefresh] = useState(()=> false);
   const [undoState, setUndoState] = useState(()=>false);
-  const [playerVsComputer, setplayerVsComputer] = useState(()=> true);
   const [checkComputer, setcheckComputer] = useState(()=> false);
-  // const [checkPlayer, setcheckPlayer] = useState(()=> false);
   const [check, setcheck] = useState(()=> false);
 
   // const [promotion, setPromotion] = useState("q");
@@ -33,7 +31,6 @@ export default function ChessGame() {
 
   useEffect(()=>{
     console.log(game.game_over());
-    console.log(playerVsComputer);
     console.log(checkComputer);
     
   })
@@ -69,7 +66,6 @@ export default function ChessGame() {
     const possibleMove = makeBestMove("b");
     // exit if the game is over
     // if (game.game_over() || game.in_draw()) return;
-    // inCheckMateComputer();
     let move = null;
     safeGameMutate((game) => {
       move = game.move(possibleMove);
@@ -164,16 +160,14 @@ export default function ChessGame() {
     setUndoState(false);
     setRefresh(false);
     setcheckComputer(false);
-    setplayerVsComputer(false)
     setcheck(false)
-    // setPromoPrompt(true);
     setPvP((PvP) => onDropPvP);
     game.reset();
   }
 
   function inCheckMateComputer(){
     if (game.game_over() === true) {
-      if (game.turn() === 'w' && playerVsComputer === true) {
+      if (game.turn() === 'w') {
         setcheckComputer(true);
       }else if(game.turn() === 'b'){
         setcheck(true)
@@ -203,7 +197,6 @@ export default function ChessGame() {
                 onClick={() => {
                   setPvP((PvP) => onDropPvC);
                   setUndoState(true);
-                  setplayerVsComputer(()=>true);
                   game.reset();
                 }}
               >
@@ -214,7 +207,7 @@ export default function ChessGame() {
                 onClick={() => {
                   setPvP((PvP) => onDropPvP);
                   setUndoState(false);
-                  setplayerVsComputer(()=>false);
+                  
                   game.reset();
                 }}
               >
@@ -222,7 +215,6 @@ export default function ChessGame() {
               </button>
             </div>
             <div className="chessitsself">
-              {console.log(playerVsComputer)}
               <div className="WinBox" style={{ display: check ? 'block' : 'none' }} > 
                 <WinLosePage Restart={Restart}/>
               </div>
