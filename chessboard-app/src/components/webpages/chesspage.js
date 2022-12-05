@@ -23,9 +23,9 @@ export default function ChessGame() {
   const [PvP, setPvP] = useState(() => onDropPvP);
   const [refresh, setRefresh] = useState(()=> false);
   const [undoState, setUndoState] = useState(()=>false);
-  const [playerVsComputer, setplayerVsComputer] = useState(()=>false);
+  const [playerVsComputer, setplayerVsComputer] = useState(()=> true);
   const [checkComputer, setcheckComputer] = useState(()=> false);
-  const [checkPlayer, setcheckPlayer] = useState(()=> false);
+  // const [checkPlayer, setcheckPlayer] = useState(()=> false);
   const [check, setcheck] = useState(()=> false);
 
   // const [promotion, setPromotion] = useState("q");
@@ -33,6 +33,7 @@ export default function ChessGame() {
 
   useEffect(()=>{
     console.log(game.game_over());
+    console.log(playerVsComputer);
     console.log(checkComputer);
     
   })
@@ -67,7 +68,8 @@ export default function ChessGame() {
   function AIMove() {
     const possibleMove = makeBestMove("b");
     // exit if the game is over
-    if (game.game_over() || game.in_draw()) return;
+    // if (game.game_over() || game.in_draw()) return;
+    // inCheckMateComputer();
     let move = null;
     safeGameMutate((game) => {
       move = game.move(possibleMove);
@@ -86,13 +88,10 @@ export default function ChessGame() {
       });
     });
     play();
-    console.log(PvP);
-    
+    inCheckMateComputer();
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
-    inCheckMateComputer();
-    setplayerVsComputer(()=> true);
     setRefresh(false);
     setTimeout(AIMove, 200);
     return true;
@@ -165,7 +164,7 @@ export default function ChessGame() {
     setUndoState(false);
     setRefresh(false);
     setcheckComputer(false);
-    setcheckPlayer(false)
+    setplayerVsComputer(false)
     setcheck(false)
     // setPromoPrompt(true);
     setPvP((PvP) => onDropPvP);
@@ -173,9 +172,7 @@ export default function ChessGame() {
   }
 
   function inCheckMateComputer(){
-    console.log(game.turn());
     if (game.game_over() === true) {
-      console.log(game.turn());
       if (game.turn() === 'w' && playerVsComputer === true) {
         setcheckComputer(true);
       }else if(game.turn() === 'b'){
@@ -206,6 +203,7 @@ export default function ChessGame() {
                 onClick={() => {
                   setPvP((PvP) => onDropPvC);
                   setUndoState(true);
+                  setplayerVsComputer(()=>true);
                   game.reset();
                 }}
               >
@@ -216,6 +214,7 @@ export default function ChessGame() {
                 onClick={() => {
                   setPvP((PvP) => onDropPvP);
                   setUndoState(false);
+                  setplayerVsComputer(()=>false);
                   game.reset();
                 }}
               >
@@ -223,6 +222,7 @@ export default function ChessGame() {
               </button>
             </div>
             <div className="chessitsself">
+              {console.log(playerVsComputer)}
               <div className="WinBox" style={{ display: check ? 'block' : 'none' }} > 
                 <WinLosePage Restart={Restart}/>
               </div>
