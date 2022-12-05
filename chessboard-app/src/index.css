@@ -255,4 +255,11 @@ img {
     display: flex;
     margin-bottom: 350px;
   }
+  .abu{
+    display: flex;
+    margin-left: 750px;
+  }
+  .abu p{
+    margin-left: 165px;
+  }
 }
