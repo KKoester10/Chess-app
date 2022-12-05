@@ -1,68 +1,72 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
- 
+  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)
+    center center/cover no-repeat;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
- 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'PT Sans', sans-serif;
+  font-family: "PT Sans", sans-serif;
+  z-index: 0;
 }
-
 
 .chessboard {
   display: flex;
-  justify-content: left;
-  margin-top: 20px;
-  margin-left: 150px;
-  
-  }
-.chessitsself{
+  width: 100vw;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+.chessitsself {
   border: 8px solid rgb(0, 0, 0);
-  margin-bottom: 200px;
   min-width: 576px;
   min-height: 576px;
   max-height: 576px;
   max-width: 576px;
+  z-index: 1;
 }
 
-.gamepage{
-  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
- 
-
+.gamepage {
+  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80)
+    center center/cover no-repeat;
+  height: calc(100vh - 80px);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
-
-
-.header{
+.header {
   display: grid;
   justify-content: center;
   margin-bottom: 15px;
   color: white;
 }
+
 .learn {
   display: flex;
   justify-content: center;
-} 
+}
 
-.player{
+.player {
   display: flex;
   justify-content: center;
   padding: 15px;
- 
 }
 
 .aboutchess {
@@ -70,113 +74,185 @@ code {
   justify-content: center;
   text-align: center;
   color: white;
-} 
+}
 
-.videotitles{
+.videotitles {
   display: flex;
   justify-content: center;
   text-align: center;
   color: white;
-
-  
 }
 
-.videotitles p{
+.videotitles p {
   display: flex;
   justify-content: center;
   text-align: center;
-
 }
 
-
-.massivediv1{
-  display:grid;
-  grid-template-columns: repeat(2,auto);
- 
+.massivediv1 {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
 }
-.game-btns{
+
+.game-btns {
   display: flex;
-  margin-left: 220PX;
-  
   padding: 8px 20px;
   border-radius: 2px;
   outline: none;
   border: none;
   cursor: pointer;
 }
-.reset-btns{
+
+.reset-btns {
   display: flex;
-  margin-left: 275px;
-  margin-top: -90px;
 }
-.history{
-  display:flex;
-  margin-left: 800px;
-  margin-right: 250px;
-  justify-content: start;
+
+.history {
+  display: flex;
   border: solid 4px #ffffff;
-  position: absolute;
   height: 150px;
   width: 500px;
-  top: 650px; 
-  left: 40px;
   color: #ffffff;
 }
 
-li{
+.left {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+li {
   display: inline-table;
 }
-ol{
+ol {
   max-width: 500px;
   max-height: 150px;
 }
-.history-box h1{
-  margin-left: 800px;
-  margin-right: 250px;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  height: 150px;
-  max-width: 500px;
-  top: 610px; 
-  left: 40px;
+
+.history-box h1 {
   color: #ffffff;
-  
+  margin-left: 150px;
 }
 
-img{
+img {
   width: 45vh;
   border-radius: 20%;
 }
-.photo-container{
-  display:flex;
+
+.photo-container {
+  display: flex;
   justify-content: center;
-  
 }
 
-.developers {  
+.developers {
   margin-top: 55px;
   display: grid;
   grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(3,auto);
+  grid-template-rows: repeat(3, auto);
   justify-content: center;
   margin-left: 20%;
   color: white;
-
 }
-.developers  h1{
+
+.developers h1 {
   font-size: 45px;
   color: white;
 }
-.developers p{
+
+.developers p {
   text-align: center;
   margin-right: 280px;
-  
 }
-.developers a{
+
+.developers a {
   color: #ffffff;
 }
 
 .abu{
-  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 600px;
+}
+.abu p{
+  margin-left: 100px;
+  color: #ffffff;
+}
+.abu a{
+  color: #ffffff;
+}
+
+.WinPrompt{
+  opacity: 75%;
+  display: block;
+  position: absolute;
+  background-color: rgba(2, 2, 2, 0.5);
+  color: white;
+  right: 1;
+  width: 560px;
+  height: 560px;
+  z-index: 2;
+}
+
+.prompt{
+  display: grid;
+  justify-content: center;
+  align-self: center;
+  z-index: 3;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  position: absolute;
+  width: 560px;
+  height: 560px;
+}
+.childPrompt{
+  display: inline-block;
+  justify-content: center;
+  align-self: center;
+  height: 350px;
+  width: 250px;
+  background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
+  background-color: whitesmoke;
+  border-radius: 4%;
+  border-left: 8px dashed whitesmoke;
+  border-right: 8px dashed whitesmoke;
+  border-top: 8px dashed #000000;
+  border-bottom: 8px dashed #000000;
+}
+.YouWin{
+  border-radius: 4%;
+  color: #82df00;
+  font-size: 3rem;
+  padding-top: 25px;
+}
+.YouLose{
+  border-radius: 4%;
+  color: #ff1e00;
+  font-size: 3rem;
+  padding-top: 25px;
+}
+.WinBox{
+  display: grid;
+}
+.playAgainParent{
+  display: grid;
+  padding-top: 70%;
+  justify-content: center;
+  align-self: end;
+}
+
+@media only screen and (min-width: 1620px) {
+  .reset-btns {
+    display: flex;
+    margin-bottom: 350px;
+  }
 }

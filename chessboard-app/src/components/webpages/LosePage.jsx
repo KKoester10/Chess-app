@@ -2,12 +2,12 @@ import React from 'react'
 import "./../../index.css";
 
 
-export default function WinLosePage(props) {
+export default function LosePage(props) {
   return (
     <div>
       <div className='prompt'>
         <div className='childPrompt'>
-          <h1 className='YouWin'>You Win!!</h1>
+          <h1 className='YouLose'>You Lose!!</h1>
           <div className='playAgainParent'>
             <button className='playAgainBtn' onClick={()=> props.Restart()}>Play again</button>
           </div>

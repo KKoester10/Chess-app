@@ -4,12 +4,14 @@ import "./../../index.css";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import Home from "../chatpages/home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chat from "../chatpages/chat";
 import { Chess } from "../../chess";
 import EvaluateBoard from "./../ChessEngine/EvaluateBoard";
 import GetBestMove from "../ChessEngine/GetBestMove";
 import Assets from "./../Assets/move-self.mp3";
+import WinLosePage from "./WinLosePage";
+import LosePage from "./LosePage";
 const socket = io.connect("http://localhost:4000");
 
 let globalSum = 0;
@@ -21,21 +23,17 @@ export default function ChessGame() {
   const [PvP, setPvP] = useState(() => onDropPvP);
   const [refresh, setRefresh] = useState(()=> false);
   const [undoState, setUndoState] = useState(()=>false);
+  const [checkComputer, setcheckComputer] = useState(()=> false);
+  const [check, setcheck] = useState(()=> false);
 
   // const [promotion, setPromotion] = useState("q");
-  // const [promoPrompt, setPromoPrompt] = useState(false);
+  // const [promoPrompt, setPromoPrompt] = useState(true);
 
-  // useEffect(()=>{
-  //   console.log("Use effect " + promotion);
-  // }, [promotion])
-
-  // useEffect(()=>{
-  //   console.log(game.in_check());
-  //   if (game.in_check() === true) {
-  //     setRefresh(true);
-  //     alert("you are in check");
-  //   }
-  // })
+  useEffect(()=>{
+    console.log(game.game_over());
+    console.log(checkComputer);
+    
+  })
 
   function play() {
     new Audio(Assets).play();
@@ -67,7 +65,7 @@ export default function ChessGame() {
   function AIMove() {
     const possibleMove = makeBestMove("b");
     // exit if the game is over
-    if (game.game_over() || game.in_draw()) return;
+    // if (game.game_over() || game.in_draw()) return;
     let move = null;
     safeGameMutate((game) => {
       move = game.move(possibleMove);
@@ -86,6 +84,7 @@ export default function ChessGame() {
       });
     });
     play();
+    inCheckMateComputer();
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
@@ -141,11 +140,13 @@ export default function ChessGame() {
     if (isPromotion) {
       let promotion = promotionPrompt();
       //var temp = setPromoPrompt(promoPrompt => true);
+      console.log(promotion);
       gameCopy.move({ to, from, promotion: promotion });
     } else {
       gameCopy.move({ to, from });
     }
     play();
+    inCheckMatePlayer();
     setRefresh(false);
     setGame(gameCopy);
     return gameCopy.move;
@@ -155,6 +156,31 @@ export default function ChessGame() {
   //   gameCopy.position(game.fen)
   //   console.log("onSnapEnd " + promotion)
   // }
+  function Restart() {
+    setUndoState(false);
+    setRefresh(false);
+    setcheckComputer(false);
+    setcheck(false)
+    setPvP((PvP) => onDropPvP);
+    game.reset();
+  }
+
+  function inCheckMateComputer(){
+    if (game.game_over() === true) {
+      if (game.turn() === 'w') {
+        setcheckComputer(true);
+      }else if(game.turn() === 'b'){
+        setcheck(true)
+      }
+    }
+  }
+  function inCheckMatePlayer(){
+    console.log(game.turn());
+    if (game.game_over() === true) {
+      console.log(game.turn());
+      setcheck(true);
+    }
+  }
 
   const handleJoinRoom = (joined) => {
     setRoomJoined(joined);
@@ -162,81 +188,87 @@ export default function ChessGame() {
 
   return (
     <>
-    <div className='gamepage'>
-      <div className="game-btns">
-        <button
-          className="btnscomp"
-          onClick={() => {
-            setPvP((PvP) => onDropPvC);
-            setUndoState(true);
-            game.reset();
-          }}
-        >
-          Player Vs. Computer
-        </button>
-        <button
-          className="btnsperson"
-          onClick={() => {
-            setPvP((PvP) => onDropPvP);
-            setUndoState(false)
-            game.reset();
-          }}
-        >
-          Player Vs. Player
-        </button>
-      </div>
+      <div className="gamepage">
+        <div className="chessboard">
+          <div className="left">
+            <div className="game-btns">
+              <button
+                className="btnscomp"
+                onClick={() => {
+                  setPvP((PvP) => onDropPvC);
+                  setUndoState(true);
+                  game.reset();
+                }}
+              >
+                Player Vs. Computer
+              </button>
+              <button
+                className="btnsperson"
+                onClick={() => {
+                  setPvP((PvP) => onDropPvP);
+                  setUndoState(false);
+                  
+                  game.reset();
+                }}
+              >
+                Player Vs. Player
+              </button>
+            </div>
+            <div className="chessitsself">
+              <div className="WinBox" style={{ display: check ? 'block' : 'none' }} > 
+                <WinLosePage Restart={Restart}/>
+              </div>
+              <div className="WinBox" style={{ display: checkComputer ? 'block' : 'none' }} > 
+                
+                <LosePage Restart={Restart}/>
+              </div>
 
-          {/* style={{display:game.in_check()? 'none':'visible'}}  */}
-      <div className="chessboard">
-        <div className="chessitsself">
-          <Chessboard position={game.fen()} onPieceDrop={PvP} />
-        </div>{" "}
-        {roomJoined ? (
-          <Chat username={username} room={room} socket={socket} />
-        ) : (
-          <Home
-            username={username}
-            setUsername={setUsername}
-            room={room}
-            setRoom={setRoom}
-            socket={socket}
-            roomJoined={setRoomJoined}
-          />
-        )}
-      </div>
-      <div className="reset-btns">
-        <button
-          className="btnsperson"
-          onClick={() => {
-            setUndoState(false)
-            setRefresh(false);
-            setPvP((PvP) => onDropPvP);
-            game.reset();
-          }}
-        >
-          Reset Game
-        </button>
-        <button
-          className="btnsperson"
-          onClick={() => {
-            if (undoState === true) {
-              alert("You cant undo a computers move")
-            }else{
-               undo();
-            }
-          }}
-        >
-          Undo Move
-        </button>
-      </div>
+              <Chessboard position={game.fen()} onPieceDrop={PvP} />
+            </div>{" "}
+            <div className="reset-btns">
+              <button
+                className="btnsperson"
+                onClick={() => Restart()}>
+                Reset Game
+              </button>
+              <button
+                className="btnsperson"
+                onClick={() => {
+                  if (undoState === true) {
+                    alert("You cant undo a computers move");
+                  } else {
+                    undo();
+                  }
+                }}
+              >
+                Undo Move
+              </button>
+            </div>
+          </div>
 
-        <div className='history-box'>
-          <h1>Move History</h1>
-          <div className="history">
-            <ol>{historyFeed()}</ol>
+          <div className="right">
+            {/* <div style={{height: "px"}}></div> */}
+            {roomJoined ? (
+              <Chat username={username} room={room} socket={socket} />
+            ) : (
+              <Home
+                username={username}
+                setUsername={setUsername}
+                room={room}
+                setRoom={setRoom}
+                socket={socket}
+                roomJoined={setRoomJoined}
+              />
+            )}
+            <div className="history-box">
+                <h1>Move History</h1>
+                <div className="history">
+                  <ol>{historyFeed()}</ol>
+                </div>
+              </div>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 }
