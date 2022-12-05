@@ -32,7 +32,7 @@ export default function ChessGame() {
   // const [promoPrompt, setPromoPrompt] = useState(true);
 
   useEffect(()=>{
-    console.log(game.in_checkmate());
+    console.log(game.game_over());
     console.log(checkComputer);
     
   })
@@ -174,7 +174,7 @@ export default function ChessGame() {
 
   function inCheckMateComputer(){
     console.log(game.turn());
-    if (game.in_checkmate() === true) {
+    if (game.game_over() === true) {
       console.log(game.turn());
       if (game.turn() === 'w' && playerVsComputer === true) {
         setcheckComputer(true);
@@ -185,7 +185,7 @@ export default function ChessGame() {
   }
   function inCheckMatePlayer(){
     console.log(game.turn());
-    if (game.in_checkmate() === true) {
+    if (game.game_over() === true) {
       console.log(game.turn());
       setcheck(true);
     }
