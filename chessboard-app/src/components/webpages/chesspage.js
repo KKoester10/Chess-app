@@ -4,12 +4,14 @@ import "./../../index.css";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 import Home from "../chatpages/home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Chat from "../chatpages/chat";
 import Chess from "chess.js";
 import EvaluateBoard from "./../ChessEngine/EvaluateBoard";
 import GetBestMove from "../ChessEngine/GetBestMove";
 import Assets from "./../Assets/move-self.mp3";
+import WinLosePage from "./WinLosePage";
+import LosePage from "./LosePage";
 const socket = io.connect("http://localhost:4000");
 
 let globalSum = 0;
@@ -19,9 +21,21 @@ export default function ChessGame() {
   const [roomJoined, setRoomJoined] = useState(false);
   const [game, setGame] = useState(new Chess());
   const [PvP, setPvP] = useState(() => onDropPvP);
-  const [refresh, setRefresh] = useState(() => false);
-  const [undoState, setUndoState] = useState(() => false);
+  const [refresh, setRefresh] = useState(()=> false);
+  const [undoState, setUndoState] = useState(()=>false);
+  const [playerVsComputer, setplayerVsComputer] = useState(()=>false);
+  const [checkComputer, setcheckComputer] = useState(()=> false);
+  const [checkPlayer, setcheckPlayer] = useState(()=> false);
+  const [check, setcheck] = useState(()=> false);
 
+  // const [promotion, setPromotion] = useState("q");
+  // const [promoPrompt, setPromoPrompt] = useState(true);
+
+  useEffect(()=>{
+    console.log(game.in_checkmate());
+    console.log(checkComputer);
+    
+  })
 
   function play() {
     new Audio(Assets).play();
@@ -72,26 +86,39 @@ export default function ChessGame() {
       });
     });
     play();
+    console.log(PvP);
+    
     // illegal move made
     if (move === null) return false;
     // valid move made, make computer move
+    inCheckMateComputer();
+    setplayerVsComputer(()=> true);
     setRefresh(false);
     setTimeout(AIMove, 200);
     return true;
   }
 
+  // function pawnPromotion(value){
+  //   <PromotionPrompt
+  //   trigger={promoPrompt}
+  //   setTrigger={setPromoPrompt}
+  //   promotion={pawnPromotion}
+  // />
+  //   setPromotion((promotion) => promotion = value)
+  //   console.log("promotion value is now " + promotion);
+  //   return promotion;
+  // }
 
-//allows the move history to be shown.
   function historyFeed() {
     let gameHistory = game.history();
     return gameHistory.map((move) => <li key={move}>{move},</li>);
   }
 
-  function undo() {
+  function undo(){
     if (refresh === false) {
       setRefresh(true);
       game.undo();
-    } else if (refresh === true) {
+    }else if(refresh === true){
       setRefresh(false);
       game.undo();
     }
@@ -118,14 +145,50 @@ export default function ChessGame() {
     if (isPromotion) {
       let promotion = promotionPrompt();
       //var temp = setPromoPrompt(promoPrompt => true);
+      console.log(promotion);
       gameCopy.move({ to, from, promotion: promotion });
     } else {
       gameCopy.move({ to, from });
     }
     play();
+    inCheckMatePlayer();
     setRefresh(false);
     setGame(gameCopy);
     return gameCopy.move;
+  }
+
+  // function onSnapEnd(promotion, gameCopy){
+  //   gameCopy.position(game.fen)
+  //   console.log("onSnapEnd " + promotion)
+  // }
+  function Restart() {
+    setUndoState(false);
+    setRefresh(false);
+    setcheckComputer(false);
+    setcheckPlayer(false)
+    setcheck(false)
+    // setPromoPrompt(true);
+    setPvP((PvP) => onDropPvP);
+    game.reset();
+  }
+
+  function inCheckMateComputer(){
+    console.log(game.turn());
+    if (game.in_checkmate() === true) {
+      console.log(game.turn());
+      if (game.turn() === 'w' && playerVsComputer === true) {
+        setcheckComputer(true);
+      }else if(game.turn() === 'b'){
+        setcheck(true)
+      }
+    }
+  }
+  function inCheckMatePlayer(){
+    console.log(game.turn());
+    if (game.in_checkmate() === true) {
+      console.log(game.turn());
+      setcheck(true);
+    }
   }
 
   const handleJoinRoom = (joined) => {
@@ -135,7 +198,6 @@ export default function ChessGame() {
   return (
     <>
       <div className="gamepage">
-        {/* style={{display:game.in_check()? 'none':'visible'}}  */}
         <div className="chessboard">
           <div className="left">
             <div className="game-btns">
@@ -161,18 +223,20 @@ export default function ChessGame() {
               </button>
             </div>
             <div className="chessitsself">
+              <div className="WinBox" style={{ display: check ? 'block' : 'none' }} > 
+                <WinLosePage Restart={Restart}/>
+              </div>
+              <div className="WinBox" style={{ display: checkComputer ? 'block' : 'none' }} > 
+                
+                <LosePage Restart={Restart}/>
+              </div>
+
               <Chessboard position={game.fen()} onPieceDrop={PvP} />
             </div>{" "}
             <div className="reset-btns">
               <button
                 className="btnsperson"
-                onClick={() => {
-                  setUndoState(false);
-                  setRefresh(false);
-                  setPvP((PvP) => onDropPvP);
-                  game.reset();
-                }}
-              >
+                onClick={() => Restart()}>
                 Reset Game
               </button>
               <button
