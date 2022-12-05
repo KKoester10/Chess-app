@@ -1,0 +1,8 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}"
+  ],
+  "appService.defaultWebAppToDeploy": "/subscriptions/b054e67d-fec5-4b31-b724-38e95d0dcfa7/AppServices/subscriptions/b054e67d-fec5-4b31-b724-38e95d0dcfa7/resourceGroups/chess-multi_group/providers/Microsoft.Web/sites/wcci-chess",
+  "appService.deploySubpath": "chessboard-app"
+}
