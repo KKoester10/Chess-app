@@ -25,14 +25,13 @@ code {
 
 .chessboard {
   display: flex;
-  justify-content: left;
-  margin-top: 20px;
-  margin-left: 150px;
-  
+  width: 100vw;
+  justify-content: space-around;
+  flex-wrap: wrap;
   }
 .chessitsself{
   border: 8px solid rgb(0, 0, 0);
-  margin-bottom: 200px;
+  /* margin-bottom: 200px; */
   min-width: 576px;
   min-height: 576px;
   max-height: 576px;
@@ -41,8 +40,13 @@ code {
 
 .gamepage{
   background: url(https://images.unsplash.com/photo-1576092762791-dd9e2220abd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80) center center/cover no-repeat;
- 
-
+  height: calc(100vh - 80px);
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 20px;
 }
 
 
@@ -96,7 +100,7 @@ code {
 }
 .game-btns{
   display: flex;
-  margin-left: 220PX;
+  /* margin-left: 220PX; */
   
   padding: 8px 20px;
   border-radius: 2px;
@@ -106,21 +110,37 @@ code {
 }
 .reset-btns{
   display: flex;
-  margin-left: 275px;
-  margin-top: -90px;
+  /* margin-left: 275px; */
+  /* margin-top: -90px; */
 }
 .history{
   display:flex;
-  margin-left: 800px;
-  margin-right: 250px;
-  justify-content: start;
+  /* margin-left: 800px; */
+  /* margin-right: 250px; */
+  /* justify-content: start; */
   border: solid 4px #ffffff;
-  position: absolute;
+  /* position: absolute; */
   height: 150px;
   width: 500px;
-  top: 650px; 
-  left: 40px;
-  color: #ffffff;
+  /* top: 650px;  */
+  /* left: 70px; */
+  color: #ffffff; 
+}
+
+.left {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right {
+  /* background-color: green; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 li{
@@ -131,18 +151,20 @@ ol{
   max-height: 150px;
 }
 .history-box h1{
-  margin-left: 800px;
-  margin-right: 250px;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  height: 150px;
-  max-width: 500px;
-  top: 610px; 
-  left: 40px;
+  /* margin-left: 800px; */
+  /* margin-right: 250px; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* position: absolute; */
+  /* height: 150px;
+  max-width: 500px; */
+  /* top: 610px;  */
+  /* left: 225px; */
   color: #ffffff;
   
 }
+
+
 
 img{
   width: 45vh;
@@ -177,6 +199,3 @@ img{
   color: #ffffff;
 }
 
-.abu{
-  
-}

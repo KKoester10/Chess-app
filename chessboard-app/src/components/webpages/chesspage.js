@@ -19,23 +19,9 @@ export default function ChessGame() {
   const [roomJoined, setRoomJoined] = useState(false);
   const [game, setGame] = useState(new Chess());
   const [PvP, setPvP] = useState(() => onDropPvP);
-  const [refresh, setRefresh] = useState(()=> false);
-  const [undoState, setUndoState] = useState(()=>false);
+  const [refresh, setRefresh] = useState(() => false);
+  const [undoState, setUndoState] = useState(() => false);
 
-  // const [promotion, setPromotion] = useState("q");
-  // const [promoPrompt, setPromoPrompt] = useState(false);
-
-  // useEffect(()=>{
-  //   console.log("Use effect " + promotion);
-  // }, [promotion])
-
-  // useEffect(()=>{
-  //   console.log(game.in_check());
-  //   if (game.in_check() === true) {
-  //     setRefresh(true);
-  //     alert("you are in check");
-  //   }
-  // })
 
   function play() {
     new Audio(Assets).play();
@@ -94,27 +80,18 @@ export default function ChessGame() {
     return true;
   }
 
-  // function pawnPromotion(value){
-  //   <PromotionPrompt
-  //   trigger={promoPrompt}
-  //   setTrigger={setPromoPrompt}
-  //   promotion={pawnPromotion}
-  // />
-  //   setPromotion((promotion) => promotion = value)
-  //   console.log("promotion value is now " + promotion);
-  //   return promotion;
-  // }
 
+//allows the move history to be shown.
   function historyFeed() {
     let gameHistory = game.history();
     return gameHistory.map((move) => <li key={move}>{move},</li>);
   }
 
-  function undo(){
+  function undo() {
     if (refresh === false) {
       setRefresh(true);
       game.undo();
-    }else if(refresh === true){
+    } else if (refresh === true) {
       setRefresh(false);
       game.undo();
     }
@@ -151,92 +128,91 @@ export default function ChessGame() {
     return gameCopy.move;
   }
 
-  // function onSnapEnd(promotion, gameCopy){
-  //   gameCopy.position(game.fen)
-  //   console.log("onSnapEnd " + promotion)
-  // }
-
   const handleJoinRoom = (joined) => {
     setRoomJoined(joined);
   };
 
   return (
     <>
-    <div className='gamepage'>
-      <div className="game-btns">
-        <button
-          className="btnscomp"
-          onClick={() => {
-            setPvP((PvP) => onDropPvC);
-            setUndoState(true);
-            game.reset();
-          }}
-        >
-          Player Vs. Computer
-        </button>
-        <button
-          className="btnsperson"
-          onClick={() => {
-            setPvP((PvP) => onDropPvP);
-            setUndoState(false)
-            game.reset();
-          }}
-        >
-          Player Vs. Player
-        </button>
-      </div>
+      <div className="gamepage">
+        {/* style={{display:game.in_check()? 'none':'visible'}}  */}
+        <div className="chessboard">
+          <div className="left">
+            <div className="game-btns">
+              <button
+                className="btnscomp"
+                onClick={() => {
+                  setPvP((PvP) => onDropPvC);
+                  setUndoState(true);
+                  game.reset();
+                }}
+              >
+                Player Vs. Computer
+              </button>
+              <button
+                className="btnsperson"
+                onClick={() => {
+                  setPvP((PvP) => onDropPvP);
+                  setUndoState(false);
+                  game.reset();
+                }}
+              >
+                Player Vs. Player
+              </button>
+            </div>
+            <div className="chessitsself">
+              <Chessboard position={game.fen()} onPieceDrop={PvP} />
+            </div>{" "}
+            <div className="reset-btns">
+              <button
+                className="btnsperson"
+                onClick={() => {
+                  setUndoState(false);
+                  setRefresh(false);
+                  setPvP((PvP) => onDropPvP);
+                  game.reset();
+                }}
+              >
+                Reset Game
+              </button>
+              <button
+                className="btnsperson"
+                onClick={() => {
+                  if (undoState === true) {
+                    alert("You cant undo a computers move");
+                  } else {
+                    undo();
+                  }
+                }}
+              >
+                Undo Move
+              </button>
+            </div>
+          </div>
 
-          {/* style={{display:game.in_check()? 'none':'visible'}}  */}
-      <div className="chessboard">
-        <div className="chessitsself">
-          <Chessboard position={game.fen()} onPieceDrop={PvP} />
-        </div>{" "}
-        {roomJoined ? (
-          <Chat username={username} room={room} socket={socket} />
-        ) : (
-          <Home
-            username={username}
-            setUsername={setUsername}
-            room={room}
-            setRoom={setRoom}
-            socket={socket}
-            roomJoined={setRoomJoined}
-          />
-        )}
-      </div>
-      <div className="reset-btns">
-        <button
-          className="btnsperson"
-          onClick={() => {
-            setUndoState(false)
-            setRefresh(false);
-            setPvP((PvP) => onDropPvP);
-            game.reset();
-          }}
-        >
-          Reset Game
-        </button>
-        <button
-          className="btnsperson"
-          onClick={() => {
-            if (undoState === true) {
-              alert("You cant undo a computers move")
-            }else{
-               undo();
-            }
-          }}
-        >
-          Undo Move
-        </button>
-      </div>
-
-        <div className='history-box'>
-          <h1>Move History</h1>
-          <div className="history">
-            <ol>{historyFeed()}</ol>
+          <div className="right">
+            {/* <div style={{height: "px"}}></div> */}
+            {roomJoined ? (
+              <Chat username={username} room={room} socket={socket} />
+            ) : (
+              <Home
+                username={username}
+                setUsername={setUsername}
+                room={room}
+                setRoom={setRoom}
+                socket={socket}
+                roomJoined={setRoomJoined}
+              />
+            )}
+            <div className="history-box">
+                <h1>Move History</h1>
+                <div className="history">
+                  <ol>{historyFeed()}</ol>
+                </div>
+              </div>
           </div>
         </div>
-        </div>
+      </div>
     </>
   );
 }
