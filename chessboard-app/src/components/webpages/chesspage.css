@@ -1,0 +1,5 @@
+.ChessboardAndChat{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+    width: 50%;
+}

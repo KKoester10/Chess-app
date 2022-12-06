@@ -58,17 +58,6 @@ code {
   color: white;
 }
 
-.learn {
-  display: flex;
-  justify-content: center;
-}
-
-.player {
-  display: flex;
-  justify-content: center;
-  padding: 15px;
-}
-
 .aboutchess {
   display: flex;
   justify-content: center;
@@ -76,25 +65,47 @@ code {
   color: white;
 }
 
-.videotitles {
+.player1 {
   display: flex;
   justify-content: center;
+  padding: 15px;
   text-align: center;
-  color: white;
+  border: 4px solid white;
+  border-style: double;
+  margin: 15px 150px 50px 150px;
+  color: #ffffff;
 }
-
-.videotitles p {
+.player2 {
   display: flex;
   justify-content: center;
+  padding: 15px;
   text-align: center;
+  border: 4px solid white;
+  border-style: double;
+  margin: 15px 150px 50px 150px;
+  color: #ffffff;
 }
-
-.massivediv1 {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
+.player3 {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  text-align: center;
+  border: 4px solid white;
+  border-style: double;
+  margin: 15px 150px 50px 150px;
+  color: #ffffff;
 }
-
-.game-btns {
+.player4 {
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  text-align: center;
+  border: 4px solid white;
+  border-style: double;
+  margin: 15px 150px 50px 150px;
+  color: #ffffff;
+}
+game-btns {
   display: flex;
   padding: 8px 20px;
   border-radius: 2px;
@@ -153,42 +164,38 @@ img {
   justify-content: center;
 }
 
-.developers {
-  margin-top: 55px;
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: repeat(3, auto);
-  justify-content: center;
-  margin-left: 20%;
-  color: white;
-}
-
-.developers h1 {
-  font-size: 45px;
-  color: white;
-}
-
-.developers p {
-  text-align: center;
-  margin-right: 280px;
-}
-
-.developers a {
-  color: #ffffff;
-}
 
 .abu{
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  margin-left: 600px;
-}
-.abu p{
-  margin-left: 100px;
+  text-align: center;
   color: #ffffff;
 }
 .abu a{
   color: #ffffff;
+}
+
+
+.top{
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  color: #ffffff;
+  text-align: center;
+}
+.top a{
+color:#ffffff;
+}
+
+.Middle{
+  display: flex;
+  justify-content: space-around;
+  padding: 1em;
+  color: #ffffff;
+  text-align: center;
+}
+.Middle a{
+  color:#ffffff;
 }
 
 .WinPrompt{
@@ -248,11 +255,4 @@ img {
   padding-top: 70%;
   justify-content: center;
   align-self: end;
-}
-
-@media only screen and (min-width: 1620px) {
-  .reset-btns {
-    display: flex;
-    margin-bottom: 350px;
-  }
 }

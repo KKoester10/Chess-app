@@ -29,10 +29,15 @@ export default function ChessGame() {
   // const [promotion, setPromotion] = useState("q");
   // const [promoPrompt, setPromoPrompt] = useState(true);
 
+  socket.on('move',function(msg){
+    game.move(msg);
+    setRefresh(()=> true);
+  })
+
   useEffect(()=>{
     console.log(game.game_over());
     console.log(checkComputer);
-    
+    setRefresh(false)
   })
 
   function play() {
@@ -89,6 +94,7 @@ export default function ChessGame() {
     if (move === null) return false;
     // valid move made, make computer move
     setRefresh(false);
+    
     setTimeout(AIMove, 200);
     return true;
   }
@@ -148,6 +154,7 @@ export default function ChessGame() {
     play();
     inCheckMatePlayer();
     setRefresh(false);
+    socket.emit('move', {to, from});
     setGame(gameCopy);
     return gameCopy.move;
   }
