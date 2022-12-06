@@ -25,6 +25,11 @@ let allUsers = []; // All users in current chat room
 io.on('connection', (socket) => {
     console.log(`User connected ${socket.id}`);
 
+    socket.on('move', function(msg){
+      socket.broadcast.emit('move',msg);
+      console.log("the return of msg is " + msg);
+    })
+
   socket.on('join_room', (data) => {
     const { username, room } = data;
     socket.join(room);
