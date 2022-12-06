@@ -187,17 +187,34 @@ img {
 .abu{
   display: flex;
   justify-content: center;
+  text-align: center;
+  color: #ffffff;
 }
+.abu a{
+  color: #ffffff;
+}
+
 
 .top{
   display: flex;
   justify-content: space-around;
   padding: 1em;
+  color: #ffffff;
+  text-align: center;
 }
+.top a{
+color:#ffffff;
+}
+
 .Middle{
   display: flex;
   justify-content: space-around;
   padding: 1em;
+  color: #ffffff;
+  text-align: center;
+}
+.Middle a{
+  color:#ffffff;
 }
 
 .WinPrompt{
