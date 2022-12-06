@@ -29,6 +29,10 @@ io.on('connection', (socket) => {
       socket.broadcast.emit('move',msg);
       console.log("the return of msg is " + msg);
     })
+    socket.on('restart', function(){
+      socket.broadcast.emit('restart');
+      console.log("the return of msg is restart");
+    })
 
   socket.on('join_room', (data) => {
     const { username, room } = data;

@@ -33,6 +33,10 @@ export default function ChessGame() {
     game.move(msg);
     setRefresh(()=> true);
   })
+  socket.on('restart',function(){
+    game.reset();
+    setRefresh(()=> true);
+  })
 
   useEffect(()=>{
     console.log(game.game_over());
@@ -118,9 +122,11 @@ export default function ChessGame() {
   function undo(){
     if (refresh === false) {
       setRefresh(true);
+     
       game.undo();
     }else if(refresh === true){
       setRefresh(false);
+     
       game.undo();
     }
   }
@@ -169,6 +175,7 @@ export default function ChessGame() {
     setcheckComputer(false);
     setcheck(false)
     setPvP((PvP) => onDropPvP);
+    socket.emit('restart');
     game.reset();
   }
 
