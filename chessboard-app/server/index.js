@@ -97,8 +97,5 @@ io.on('connection', (socket) => {
 app.get("/", (req, res) => {
   res.send("hello world");
 });
-// app.listen(process.env.port, function () {  //Updated
-//   var addr = app.address();
-//   console.log('   app listening on http://' + addr.address + ':' + addr.port);
-// });
+
 server.listen(4000, () => "server is running on port 4000");
