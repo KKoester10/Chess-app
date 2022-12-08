@@ -12,6 +12,7 @@
     border: 8px solid rgb(0, 0, 0);
     border-radius: 2%;
     box-shadow: 10px 5px 5px black;
+    background: #fff;
   }
   
   /* Room and users component */
