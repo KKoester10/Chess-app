@@ -174,7 +174,7 @@ export default function ChessGame() {
     setRefresh(false);
     setcheckComputer(false);
     setcheck(false)
-    setPvP((PvP) => onDropPvP);
+    // setPvP((PvP) => onDropPvP);
     socket.emit('restart');
     game.reset();
   }
@@ -211,7 +211,7 @@ export default function ChessGame() {
                 onClick={() => {
                   setPvP((PvP) => onDropPvC);
                   setUndoState(true);
-                  game.reset();
+                  Restart();
                 }}
               >
                 Player Vs. Computer
@@ -222,7 +222,7 @@ export default function ChessGame() {
                   setPvP((PvP) => onDropPvP);
                   setUndoState(false);
                   
-                  game.reset();
+                  Restart();
                 }}
               >
                 Player Vs. Player
